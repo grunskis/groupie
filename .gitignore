@@ -9,7 +9,8 @@
 *.pyc
 
 # Django
-local_settings.py
+settings_local.py
 /static/*
 
+# Mac
 .DS_Store
