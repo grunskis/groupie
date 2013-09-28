@@ -151,18 +151,14 @@ EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
 MAILGUN_SERVER_NAME = 'groupie.mailgun.org'
 MAILGUN_ACCESS_KEY = os.environ['MAILGUN_API_KEY']
 
-STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
-PIPELINE_COMPILERS = (
-    'pipeline.compilers.less.LessCompiler',
-)
-
-#PIPELINE_ENABLED = True
+PIPELINE_ENABLED = True
 
 PIPELINE_CSS = {
     'bootstrap': {
         'source_filenames': (
-            'less/bootstrap.less',
+            'css/bootstrap.css',
         ),
         'output_filename': 'css/bootstrap.css',
         'extra_context': {
@@ -171,7 +167,7 @@ PIPELINE_CSS = {
     },
     'groupie': {
         'source_filenames': (
-            'less/style.less',
+            'css/style.css',
         ),
         'output_filename': 'css/groupie.css',
         'extra_context': {
