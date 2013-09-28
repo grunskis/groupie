@@ -25,7 +25,7 @@ $(function() {
 
     $('#id_emails').tagsinput({
         tagClass: function(item) {
-            return (/(.+)@(.+){2,}\.(.+){2,}/.test(item) ? 'label-success' : 'label-danger');
+            return (/(.+)@(.+){2,}\.(.+){2,}/.test(item) ? 'label label-success' : 'label label-danger');
         }
     });
 });
