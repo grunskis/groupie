@@ -1,4 +1,7 @@
+import os
+
 import dj_database_url
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -18,7 +21,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
-import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
@@ -68,7 +70,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '6a4(dw37#l7y882q=fhtfryw0rxwq!4!*)w6emas-xi(ke-k@j'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
