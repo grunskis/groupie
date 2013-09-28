@@ -23,6 +23,7 @@ ALLOWED_HOSTS = ['*']
 
 BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'
@@ -200,6 +201,9 @@ PIPELINE_JS = {
     'groupie': {
         'source_filenames': (
           'js/app.js',
+          'lib/timepicker/jquery.timepicker.min.js',
+          'lib/timepicker/lib/base.js',
+          'lib/timepicker/lib/datepair.js'
         ),
         'output_filename': 'js/groupie.js'
     }
@@ -209,4 +213,3 @@ PIPELINE_JS = {
 RAVEN_CONFIG = {
     'dsn': 'https://92933347be644c848da313d07b489c2a:ac141b8954e440eea446ec686fe3aada@app.getsentry.com/13645',
 }
-

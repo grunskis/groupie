@@ -6,16 +6,16 @@
 
 {% block main %}
 
-	{{ form|bootstrap }}
+	<form action='.' method='post'>
+		{% csrf_token %}
+		{{ form|bootstrap }}
 
-	<hr />
+		<p class="datepair" data-language="javascript">
+			<input type="text" class="date">
+			<input type="text" class="time">
+		</p>
 
-	# For horizontal forms
-	{{ form|bootstrap_horizontal }}
-
-	<hr />
-
-	# Or with custom size (default is 'col-lg-2 col-sm-2')
-	{{ form|bootstrap_horizontal:'col-lg-4' }}
+		<input class="btn-primary" type="submit" name="create" value="create" />
+	</form>
 
 {% endblock main %}
