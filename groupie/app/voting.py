@@ -12,23 +12,17 @@ def setup_voting(voting):
 
     # notification emails sendings
     subject = "new groupie"
-    body = "http://localhost:8000/{}".format(voting.url_hash)
     from_email = voting.from_email
+    url = "http://localhost:8000/{}".format(voting.url_hash)
+
+    for vr in voting.voters.all():
+        body = url + "?ref={}".format(vr.ref_hash)
+        send_mail(subject, body, from_email, [vr.email])
 
     if voting.send_to_all:
         to_emails = [vr.email for vr in voting.voters.all()]
+        body = "DISCUSS! {}".format(url)
         send_mail(subject, body, from_email, to_emails)
-
-        # creator gets an additional email with referer to give admin rights on voting page
-        vr = voting.creator
-        body += "?ref={}".format(vr.ref_hash)
-        send_mail(subject, body, from_email, [vr.email])
-
-    else:
-        # each user gets a separate email with a referer to identify him while voting
-        for vr in voting.voters:
-            body += "?ref={}".format(vr.ref_hash)
-            send_mail(subject, body, from_email, [vr.email])
 
     # deadline reminders scheduling
     if voting.deadline:
