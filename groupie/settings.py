@@ -23,7 +23,8 @@ ALLOWED_HOSTS = ['*']
 
 BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = 'static'
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
@@ -150,7 +151,7 @@ EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
 MAILGUN_SERVER_NAME = 'groupie.mailgun.org'
 MAILGUN_ACCESS_KEY = os.environ['MAILGUN_API_KEY']
 
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 
 PIPELINE_COMPILERS = (
     'pipeline.compilers.less.LessCompiler',
@@ -209,3 +210,4 @@ PIPELINE_JS = {
 RAVEN_CONFIG = {
     'dsn': 'https://92933347be644c848da313d07b489c2a:ac141b8954e440eea446ec686fe3aada@app.getsentry.com/13645',
 }
+
