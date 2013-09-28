@@ -23,8 +23,8 @@ ALLOWED_HOSTS = ['*']
 
 BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-print 'STATIC_ROOT:', STATIC_ROOT
+STATIC_ROOT = 'static'
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
@@ -210,3 +210,4 @@ PIPELINE_JS = {
 RAVEN_CONFIG = {
     'dsn': 'https://92933347be644c848da313d07b489c2a:ac141b8954e440eea446ec686fe3aada@app.getsentry.com/13645',
 }
+
