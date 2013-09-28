@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load bootstrap %}
 {% load jstemplate %}
 
 {% block main %}
@@ -7,11 +6,40 @@
 {% mustachejs "datetimepicker" %}
 
 <form action="." method="post">{% csrf_token %}
-  {{ form|bootstrap }}
-
-  <div class="datetimepicker input-append date" id="datetimepicker_0" data-date-format="dd/mm/yyyy hh:ii">
-    <input class="span2" size="16" type="text" value="">
-    <span class="add-on"><i class="icon-th"></i></span>
+  <div class="form-group">
+    <label class="control-label" for="id_from_email">Your email</label>
+    <div class="">
+      <input class="form-control" id="id_from_email" maxlength="255" name="from_email" type="email" placeholder="you@yourserver.com" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="id_description">What is your proposal?</label>
+    <div class="">
+      <textarea class=" form-control" cols="40" id="id_description" name="description" rows="5" placeholder="Describe your planned activity here..."></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label " for="id_emails">Friend emails</label>
+    <div class="">
+      <input class=" form-control" id="id_emails" name="emails" type="text" placeholder="List here emails of your buddies" />
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="">
+      <div class="checkbox">
+        <label>
+          <input checked="checked" id="id_send_to_all" name="send_to_all" type="checkbox" />
+          <span>Let everybody know who's invited</span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="voting_deadline">Voting deadline</label>
+    <div class="input-append date" id="voting_deadline" data-date-format="dd/mm/yyyy hh:ii">
+      <input class="form-control span2" size="16" type="text" value="">
+      <span class="add-on"><i class="icon-th"></i></span>
+    </div>
   </div>
   <div id="empty"></div>
   <a class="btn btn-default" id="add-datepair">Add Dates</a>

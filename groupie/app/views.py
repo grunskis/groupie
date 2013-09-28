@@ -14,16 +14,6 @@ from groupie.app.models import Voting, Voter, VotingOption
 from groupie.app.voting import setup_voting
 
 
-SAMPLE_DATA = {
-    'from_email': "foobar@foo.bar",
-    'description': "foo bar bar foo?",
-    'deadline': datetime.now() + timedelta(seconds=10),
-    'send_to_all': True,
-    'emails': "a@a.com, b@b.com, c@c.com",
-    'voting_options': "hey apple # hey orange # hey kiwi"
-}
-
-
 ## HELPERS
 
 def voter_from_referer(function):
@@ -49,7 +39,7 @@ def home(request):
             # TODO: use reverse
             return HttpResponseRedirect('/{}?ref={}'.format(voting.url_hash, voting.creator.ref_hash))
     else:
-        form = VotingForm(initial=SAMPLE_DATA)
+        form = VotingAddForm()
     return render(request, 'home.html', {'form': form})
 
 
