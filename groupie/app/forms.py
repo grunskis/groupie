@@ -39,14 +39,20 @@ class VotingAddForm(forms.ModelForm):
         exclude = ('deadline', 'voting_options')
 
     def clean(self, *args, **kwargs):
-        # TODO: handle 'deadlint' and 'voting_options' properly
         cleaned_data = super(VotingAddForm, self).clean(*args, **kwargs)
+
+        # manually cleaning voting options
         vos = self.data.getlist('voting_option')
         if not vos:
             raise forms.ValidationError('Voting options missing')
         cleaned_data.update({'voting_options': vos})
-        return cleaned_data
+
+        # removing creator from invited
+        self.cleaned_data['emails'] = \
+            [e for e in self.cleaned_data['emails'] if not e == self.cleaned_data['from_email']]
+
         # TODO: check if deadline is not later then the closest option
+        return cleaned_data
 
     def save(self, *args, **kwargs):
         emails = self.cleaned_data.pop('emails')
