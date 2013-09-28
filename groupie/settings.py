@@ -158,7 +158,7 @@ PIPELINE_ENABLED = True
 PIPELINE_CSS = {
     'bootstrap': {
         'source_filenames': (
-            'css/bootstrap.css',
+            'lib/bootstrap/css/bootstrap.css',
         ),
         'output_filename': 'css/bootstrap.css',
         'extra_context': {
