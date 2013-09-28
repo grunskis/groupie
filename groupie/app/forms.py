@@ -53,6 +53,10 @@ class VotingForm(forms.ModelForm):
     class Meta:
         model = Voting
 
+    def clean(self, *args, **kwargs):
+        # TODO: check if deadline is not later then the closest option
+        return super(VotingForm, self).clean(*args, **kwargs)
+
     def save(self, *args, **kwargs):
         emails = self.cleaned_data.pop('emails')
         voting_options = self.cleaned_data.pop('voting_options')

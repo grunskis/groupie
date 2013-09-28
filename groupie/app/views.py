@@ -24,7 +24,7 @@ def setup_voting(voting):
     for vo in voting.voting_options.all():
         vo.voters.add(v)
 
-    # TODO: send emails
+    # TODO: send emails (remember about send_to_all)
 
     # TODO: schedule sending of deadline reminder
 

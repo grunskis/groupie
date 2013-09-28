@@ -19,7 +19,7 @@ class Voting(models.Model):
 
     from_email = models.CharField(max_length=255)
     description = models.TextField()
-    deadline = models.DateTimeField()
+    deadline = models.DateTimeField(blank=True, null=True)
 
     # indicates if want to send notification emails to all emails at once (as one group email)
     send_to_all = models.BooleanField()
