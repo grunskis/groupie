@@ -34,7 +34,12 @@ def home(request):
             setup_voting(voting)
             # TODO: use reverse
             return HttpResponseRedirect('/{}?ref={}'.format(voting.url_hash, voting.creator.ref_hash))
-    return render(request, 'home.html')
+
+        context = {'form': form}
+    else:
+        context = {}
+
+    return render(request, 'home.html', context)
 
 
 @require_http_methods(["GET", "POST"])

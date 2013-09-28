@@ -15,9 +15,9 @@ def generate_hash():
 
 
 class Voting(models.Model):
-    url_hash = models.CharField(primary_key=True, max_length=8, default=generate_hash, editable=False)
-
-    from_email = models.CharField(max_length=255)
+    url_hash = models.CharField(primary_key=True, max_length=8,
+                                default=generate_hash, editable=False)
+    from_email = models.EmailField(max_length=255)
     description = models.TextField()
     deadline = models.DateTimeField(blank=True, null=True)
 
