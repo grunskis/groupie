@@ -45,12 +45,17 @@ hr.divisor {
   color: #ecf0f1;
   font-weight: normal;
 }
+#add-datepair {
+  position: absolute;
+  bottom: 53px;
+}
 .italy {
   background: url(../img/group-travel02.jpg) left bottom;
   width: 100%;
 }
 .italy label {
   font-size: 18px;
+  margin: 0;
 }
 .italy h1,
 .italy h2,
@@ -63,4 +68,7 @@ hr.divisor {
 }
 .italy .checkbox input {
   margin-top: 15px;
+}
+.bootstrap-tagsinput {
+    width: 100%;
 }

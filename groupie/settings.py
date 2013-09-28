@@ -172,7 +172,8 @@ PIPELINE_CSS = {
     'groupie': {
         'source_filenames': (
             'css/datetimepicker.css',
-            'css/style.css',
+            'css/bootstrap-tagsinput.css',
+            'css/style.css'
         ),
         'output_filename': 'css/groupie.css',
         'extra_context': {
@@ -203,7 +204,8 @@ PIPELINE_JS = {
         'source_filenames': (
             'lib/mustache.js',
             'libs/django.mustache.js',
-            'js/bootstrap-datetimepicker.js'
+            'js/bootstrap-datetimepicker.js',
+            'js/bootstrap-tagsinput.js'
         ),
         'output_filename': 'js/libs.js'
     },

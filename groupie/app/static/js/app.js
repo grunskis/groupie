@@ -17,10 +17,11 @@ $(function() {
             datetimepickerOptions);
 
         $('.remove').click(function () {
-            $(this).parent().remove();
+            $(this).parent().parent().remove();
         });
 
         return false;
     });
 
+    $('#id_emails').tagsinput();
 });
