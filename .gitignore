@@ -1,9 +1,13 @@
+# Eclipse
 .project
 .pydevproject
+.settings
 
+# defaults
 *.log
 *.pot
 *.pyc
-local_settings.py
 
+# Django
+local_settings.py
 staticfiles
