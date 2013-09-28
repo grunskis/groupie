@@ -9,5 +9,5 @@
 *.pyc
 
 # Django
-local_settings.py
+settings_local.py
 staticfiles
