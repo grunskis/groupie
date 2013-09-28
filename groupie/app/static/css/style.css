@@ -57,3 +57,6 @@ hr.divisor {
   font-family: 'Oxygen', sans-serif;
   color: #ecf0f1;
 }
+.italy .checkbox input {
+  margin-top: 15px;
+}
