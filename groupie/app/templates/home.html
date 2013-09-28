@@ -4,16 +4,15 @@
 
 {% block main %}
 
-{% mustachejs "add_datepair" %}
+{% mustachejs "datetimepicker" %}
 
-<form action="." method="post">
-  {% csrf_token %}
+<form action="." method="post">{% csrf_token %}
   {{ form|bootstrap }}
 
-  <p class="datepair" data-language="javascript">
-    <input name="date_0" type="text" class="date">
-    <input name="time_0" type="text" class="time">
-  </p>
+  <div class="datetimepicker input-append date" id="datetimepicker_0" data-date-format="dd/mm/yyyy hh:ii">
+    <input class="span2" size="16" type="text" value="">
+    <span class="add-on"><i class="icon-th"></i></span>
+  </div>
   <div id="empty"></div>
   <a class="btn btn-default" id="add-datepair">Add Dates</a>
   <input class="btn-primary" type="submit" name="create" value="create" />

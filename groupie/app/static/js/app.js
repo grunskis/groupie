@@ -1,21 +1,20 @@
 $(function() {
-    $('#add-datepair').on('click', function() {
-        var $datepair = $('.datepair'),
-            $datepairs = $datepair.find('.time'),
-            template = Mustache.template('add_datepair'),
-            html = template.render({nr: $datepairs.length});
+    $('#datetimepicker_0').datetimepicker({autoclose: true});
 
-        $datepair.append(html);
-        $datepair.timepicker();
+    $('#add-datepair').on('click', function() {
+        var $datepickers = $('.date'),
+            template = Mustache.template('datetimepicker'),
+            html = template.render({nr: $datepickers.length});
+
+        $(html).insertAfter($datepickers.last());
+        $('#datetimepicker_' + $datepickers.length).datetimepicker({
+            autoclose: true
+        });
 
         return false;
     });
 
-    $('#rem-dates').on('click', function() {
-        if( i > 2 ) {
-            $(this).parents('p').remove();
-            i--;
-        }
-        return false;
+    $('.datetimepicker .remove').on('click', function () {
+        $(this).remove();
     });
 });

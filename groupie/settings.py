@@ -171,9 +171,8 @@ PIPELINE_CSS = {
     },
     'groupie': {
         'source_filenames': (
+            'css/datetimepicker.css',
             'css/style.css',
-            'lib/timepicker/jquery.timepicker.css',
-            'lib/timepicker/lib/base.css'
         ),
         'output_filename': 'css/groupie.css',
         'extra_context': {
@@ -202,11 +201,9 @@ PIPELINE_JS = {
     },
     'libs': {
         'source_filenames': (
-            'lib/timepicker/jquery.timepicker.min.js',
-            'lib/timepicker/lib/base.js',
-            'lib/timepicker/lib/datepair.js',
             'lib/mustache.js',
             'libs/django.mustache.js',
+            'js/bootstrap-datetimepicker.js'
         ),
         'output_filename': 'js/libs.js'
     },
