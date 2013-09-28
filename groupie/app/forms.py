@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+
 from django import forms
 from django.core.validators import validate_email
 
@@ -30,32 +32,35 @@ class MultiEmailField(forms.Field):
             validate_email(email)
 
 
-class MultiOptionsField(forms.Field):
-    def _parse_options(self, options):
-        """
-        Expects voting options as a # separated list of options (can also contain one email).
-        """
-        return [o.strip() for o in options.split('#')]
-
-    def to_python(self, value):
-        "Normalize data to a list of strings."
-
-        # Return an empty list if no input was given.
-        if not value:
-            return []
-        return self._parse_options(value)
-
-
 class VotingAddForm(forms.ModelForm):
     emails = MultiEmailField()
 
     class Meta:
         model = Voting
+        # TODO: handle 'deadlint' and 'voting_options' properly
         exclude = ('deadline', 'voting_options')
 
     def clean(self, *args, **kwargs):
+        cleaned_data = super(VotingAddForm, self).clean(*args, **kwargs)
+
+        # manually cleaning deadlins
+        d = self.data.get('deadline')
+        if d:
+            d = datetime.strptime(d, '%d/%m/%Y %H:%M').strftime('%Y-%m-%d %H:%M')
+            cleaned_data.update({'deadline': d})
+
+        # manually cleaning voting options
+        vos = self.data.getlist('voting_options')
+        if not vos:
+            raise forms.ValidationError('Voting options missing')
+        cleaned_data.update({'voting_options': vos})
+
+        # removing creator from invited
+        self.cleaned_data['emails'] = \
+            [e for e in self.cleaned_data['emails'] if not e == self.cleaned_data['from_email']]
+
         # TODO: check if deadline is not later then the closest option
-        return super(VotingAddForm, self).clean(*args, **kwargs)
+        return cleaned_data
 
     def save(self, *args, **kwargs):
         emails = self.cleaned_data.pop('emails')

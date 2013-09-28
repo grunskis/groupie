@@ -5,7 +5,9 @@
 
 {% mustachejs "datetimepicker" %}
 
-<form role="form" action="." method="post">{% csrf_token %}
+
+<form role="form" action="{% url 'home' %}" method="post">
+	{% csrf_token %}
   <div class="form-group">
     <label class="control-label" for="id_from_email">Your email</label>
     <div class="">
@@ -34,7 +36,7 @@
   <div class="form-group">
     <label class="control-label" for="voting_deadline">Voting deadline</label>
     <div class="input-append date" id="voting_deadline" data-date-format="dd/mm/yyyy hh:ii">
-      <input class="form-control input-sm" size="16" type="text" value="" placeholder="26/08/2013 01:46" />
+      <input class="form-control input-sm" size="16" name="deadline" type="text" value="" placeholder="26/08/2013 01:40" />
       <span class="add-on"><i class="icon-th"></i></span>
     </div>
   </div>
