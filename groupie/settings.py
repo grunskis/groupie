@@ -111,6 +111,7 @@ INSTALLED_APPS = (
     'twitter_bootstrap',
     'bootstrapform',
     'raven.contrib.django.raven_compat',
+    'jstemplate',
 
     'groupie.app'
 )
@@ -170,9 +171,8 @@ PIPELINE_CSS = {
     },
     'groupie': {
         'source_filenames': (
+            'css/datetimepicker.css',
             'css/style.css',
-            'lib/timepicker/jquery.timepicker.css',
-            'lib/timepicker/lib/base.css'
         ),
         'output_filename': 'css/groupie.css',
         'extra_context': {
@@ -199,12 +199,17 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/bootstrap.js',
     },
+    'libs': {
+        'source_filenames': (
+            'lib/mustache.js',
+            'libs/django.mustache.js',
+            'js/bootstrap-datetimepicker.js'
+        ),
+        'output_filename': 'js/libs.js'
+    },
     'groupie': {
         'source_filenames': (
-          'lib/timepicker/jquery.timepicker.min.js',
-          'lib/timepicker/lib/base.js',
-          'lib/timepicker/lib/datepair.js',
-          'js/app.js'
+            'js/app.js',
         ),
         'output_filename': 'js/groupie.js'
     }

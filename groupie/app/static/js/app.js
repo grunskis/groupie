@@ -1,20 +1,20 @@
 $(function() {
-        var scntDiv = $('#date-picker');
-        var i = $('#add-dates p').size() + 1;
+    $('#datetimepicker_0').datetimepicker({autoclose: true});
 
-        $('#add-dates').on('click', function() {
-                
-                
-                $('<p id="date-picker' + i +'" class="datepair" data-language="javascript"><input id="date-' + i +' " name="date-' + i +'" type="text" class="date"><input id="time-" name="time-" type="text" class="time"><a href="#" id="rem-dates">Remove</a></p>').insertAfter(scntDiv);
-                i++;
-                return false;
+    $('#add-datepair').on('click', function() {
+        var $datepickers = $('.date'),
+            template = Mustache.template('datetimepicker'),
+            html = template.render({nr: $datepickers.length});
+
+        $(html).insertAfter($datepickers.last());
+        $('#datetimepicker_' + $datepickers.length).datetimepicker({
+            autoclose: true
         });
 
-        $('#rem-dates').on('click', function() { 
-                if( i > 2 ) {
-                        $(this).parents('p').remove();
-                        i--;
-                }
-                return false;
-        }); 
+        return false;
+    });
+
+    $('.datetimepicker .remove').on('click', function () {
+        $(this).remove();
+    });
 });

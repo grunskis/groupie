@@ -48,17 +48,23 @@ class MultiOptionsField(forms.Field):
 
 class VotingForm(forms.ModelForm):
     emails = MultiEmailField()
-    options = MultiOptionsField()
+    voting_options = MultiOptionsField()
 
     class Meta:
         model = Voting
 
+    def clean(self, *args, **kwargs):
+        # TODO: check if deadline is not later then the closest option
+        return super(VotingForm, self).clean(*args, **kwargs)
+
     def save(self, *args, **kwargs):
         emails = self.cleaned_data.pop('emails')
-        options = self.cleaned_data.pop('options')
+        voting_options = self.cleaned_data.pop('voting_options')
 
         v = Voting.objects.create(**self.cleaned_data)
-        vrs = [Voter.objects.create(voting=v, email=e) for e in emails]
-        os = [VotingOption.objects.create(voting=v, text=o) for o in options]
+        for e in emails:
+            Voter.objects.create(voting=v, email=e)
+        for vo in voting_options:
+            VotingOption.objects.create(voting=v, text=vo)
 
-        return v, vrs, os
+        return v

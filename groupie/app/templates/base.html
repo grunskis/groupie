@@ -8,11 +8,13 @@
     {% compressed_css 'bootstrap' %}
     {% compressed_css 'groupie' %}
 
+    <script src="//code.jquery.com/jquery.js"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="{% static 'lib/html5shiv/js/html5shiv.js' %}"></script>
       <script src="{% static 'lib/respond/js/respond.js' %}"></script>
     <![endif]-->
+    {% compressed_js 'libs' %}
   </head>
   <body>
   <div class="jumbotron italy">
@@ -67,7 +69,6 @@
     </div>
   </footer>
 
-    <script src="//code.jquery.com/jquery.js"></script>
     {% compressed_js 'bootstrap' %}
     {% compressed_js 'groupie' %}
   </body>
