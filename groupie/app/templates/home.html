@@ -1,22 +1,21 @@
 {% extends "base.html" %}
-
 {% load bootstrap %}
-
-
+{% load jstemplate %}
 
 {% block main %}
 
-	<form action='.' method='post'>
-		{% csrf_token %}
-		{{ form|bootstrap }}
+{% mustachejs "add_datepair" %}
 
-		<p id="date-picker" class="datepair" data-language="javascript">
-			<input id="date-" name="date-" type="text" class="date">
-			<input id="time-" name="time-" type="text" class="time">
-		</p>
-		<div id="empty"></div>
-		<a class="btn btn-default" id="add-dates">Add Dates</a>
-		<input class="btn-primary" type="submit" name="create" value="create" />
-	</form>
+<form action="." method="post">
+  {% csrf_token %}
+  {{ form|bootstrap }}
 
+  <p class="datepair" data-language="javascript">
+    <input name="date_0" type="text" class="date">
+    <input name="time_0" type="text" class="time">
+  </p>
+  <div id="empty"></div>
+  <a class="btn btn-default" id="add-datepair">Add Dates</a>
+  <input class="btn-primary" type="submit" name="create" value="create" />
+</form>
 {% endblock main %}
