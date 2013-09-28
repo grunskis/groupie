@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime, timedelta
 from functools import wraps
 
 from django.http import HttpResponseRedirect
@@ -35,9 +34,7 @@ def home(request):
             setup_voting(voting)
             # TODO: use reverse
             return HttpResponseRedirect('/{}?ref={}'.format(voting.url_hash, voting.creator.ref_hash))
-    else:
-        form = VotingAddForm()
-    return render(request, 'home.html', {'form': form})
+    return render(request, 'home.html')
 
 
 @require_http_methods(["GET", "POST"])
