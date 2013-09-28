@@ -49,6 +49,9 @@ hr.divisor {
   background: url(../img/group-travel02.jpg) left bottom;
   width: 100%;
 }
+.italy label {
+  font-size: 18px;
+}
 .italy h1,
 .italy h2,
 .italy h3,
