@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+
 from django import forms
 from django.core.validators import validate_email
 
@@ -41,8 +43,14 @@ class VotingAddForm(forms.ModelForm):
     def clean(self, *args, **kwargs):
         cleaned_data = super(VotingAddForm, self).clean(*args, **kwargs)
 
+        # manually cleaning deadlins
+        d = self.data.get('deadline')
+        if d:
+            d = datetime.strptime(d, '%d/%m/%Y %H:%M').strftime('%Y-%m-%d %H:%M')
+            cleaned_data.update({'deadline': d})
+
         # manually cleaning voting options
-        vos = self.data.getlist('voting_option')
+        vos = self.data.getlist('voting_options')
         if not vos:
             raise forms.ValidationError('Voting options missing')
         cleaned_data.update({'voting_options': vos})
