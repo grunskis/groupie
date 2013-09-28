@@ -1,0 +1,26 @@
+@import url(http://fonts.googleapis.com/css?family=Oxygen:400,300);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Oxygen', sans-serif;
+  color: #2c3e50;
+}
+.marketing.container {
+  text-align: center;
+}
+.italy {
+  background: #2980b9;
+  /*height: 610px;*/
+
+}
+.italy h1,
+.italy h2,
+.italy h3,
+.italy h4,
+.italy h5,
+.italy h6 {
+  color: #ecf0f1;
+}
