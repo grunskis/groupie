@@ -10,11 +10,11 @@
 		{% csrf_token %}
 		{{ form|bootstrap }}
 
-		<p class="datepair" data-language="javascript">
+		<p id="p_scents" class="datepair" data-language="javascript">
 			<input type="text" class="date">
 			<input type="text" class="time">
 		</p>
-
+		<a class="btn btn-default" id="add-dates">Add Dates</a>
 		<input class="btn-primary" type="submit" name="create" value="create" />
 	</form>
 
