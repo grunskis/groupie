@@ -9,7 +9,6 @@
     {% compressed_css 'groupie' %}
 
     <script src="//code.jquery.com/jquery.js"></script>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="{% static 'lib/html5shiv/js/html5shiv.js' %}"></script>
       <script src="{% static 'lib/respond/js/respond.js' %}"></script>
@@ -43,15 +42,15 @@
   <div class="container how-it-works">
     <div class="row">
       <div class="col-sm-4">
-        <img src="static/img/organize-icon.png">
+        <img src="{% static 'img/organize-icon.png' %}">
         <h4>Organize group events<br> and trips</h4>
       </div>
       <div class="col-sm-4">
-         <img src="static/img/comments-icon.png">
+         <img src="{% static 'img/comments-icon.png' %}">
         <h4>Add comments directly<br> from emails</h4>
       </div>
       <div class="col-sm-4">
-        <img src="static/img/notifications-icon.png">
+        <img src="{% static 'img/notifications-icon.png' %}">
         <h4>Send reminders and summarize emails to all group</h4>
       </div>
     </div>
@@ -59,7 +58,9 @@
   <footer>
     <div class="container">
       <div class="row">
-      <hr class="divisor">
+        <hr class="col-sm-12 divisor">
+      </div>
+      <div class="row">
       <div class="col-sm-10">© 2013 Groupie manager</div>
       <div class="col-sm-2 text-right"><a href="http://djangodash.com/teams/c4/puccis/">Django Dash 2013</a></div>
       

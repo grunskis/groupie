@@ -48,10 +48,10 @@ class MultiOptionsField(forms.Field):
 
 class VotingAddForm(forms.ModelForm):
     emails = MultiEmailField()
-    voting_options = MultiOptionsField()
 
     class Meta:
         model = Voting
+        exclude = ('deadline', 'voting_options')
 
     def clean(self, *args, **kwargs):
         # TODO: check if deadline is not later then the closest option

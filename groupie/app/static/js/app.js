@@ -1,20 +1,25 @@
 $(function() {
-    $('#datetimepicker_0').datetimepicker({autoclose: true});
+    var datetimepickerOptions = {
+        autoclose: true,
+        minView: 1
+    };
+
+    $('#voting_deadline').datetimepicker(datetimepickerOptions);
+    $('#voting_option_0').datetimepicker(datetimepickerOptions);
 
     $('#add-datepair').on('click', function() {
-        var $datepickers = $('.date'),
+        var $datepickers = $('.voting-option'),
             template = Mustache.template('datetimepicker'),
             html = template.render({nr: $datepickers.length});
 
         $(html).insertAfter($datepickers.last());
-        $('#datetimepicker_' + $datepickers.length).datetimepicker({
-            autoclose: true
-        });
+        $('#voting_option_' + $datepickers.length).datetimepicker(
+            datetimepickerOptions);
 
         return false;
     });
 
-    $('.datetimepicker .remove').on('click', function () {
+    $('.voting-option .remove').on('click', function () {
         $(this).remove();
     });
 });
