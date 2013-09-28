@@ -10,4 +10,7 @@
 
 # Django
 settings_local.py
-staticfiles
+/static/*
+
+# Mac
+.DS_Store

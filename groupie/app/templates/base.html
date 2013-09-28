@@ -1,0 +1,46 @@
+{% load staticfiles %}
+{% load compressed %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Groupie manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% compressed_css 'bootstrap' %}
+    {% compressed_css 'groupie' %}
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="{% static 'lib/html5shiv/js/html5shiv.js' %}"></script>
+      <script src="{% static 'lib/respond/js/respond.js' %}"></script>
+    <![endif]-->
+  </head>
+  <body>
+  <div class="jumbotron italy">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1>Welcome to Groupie!</h1>
+          <h4>Manage groups ideas for events, trips and anything else!</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container marketing">
+    <div class="row">
+      <div class="col-lg-4">
+        <h3>Organize group events and trips</h3>
+      </div>
+      <div class="col-lg-4">
+        <h3>Add comments directly from emails</h3>
+      </div>
+      <div class="col-lg-4">
+        <h3>Send reminders and summarize emails to all group</h3>
+      </div>
+    </div>
+  </div>
+
+    <script src="//code.jquery.com/jquery.js"></script>
+    {% compressed_js 'bootstrap' %}
+    {% compressed_js 'groupie' %}
+  </body>
+</html>

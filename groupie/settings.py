@@ -20,13 +20,12 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
-# Static asset configuration
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = 'staticfiles'
+BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
 )
 
 # Local time zone for this installation. Choices can be found here:
@@ -66,7 +65,7 @@ MEDIA_URL = ''
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'pipeline.finders.PipelineFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -95,9 +94,6 @@ ROOT_URLCONF = 'groupie.urls'
 WSGI_APPLICATION = 'groupie.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
 )
 
 INSTALLED_APPS = (
@@ -108,6 +104,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+
+    'pipeline',
+    'twitter_bootstrap',
+
     'groupie.app'
 )
 
@@ -145,9 +145,59 @@ LOGGING = {
 EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
 
 MAILGUN_SERVER_NAME = 'groupie.mailgun.org'
-MAILGUN_ACCESS_KEY = os.environ['MAILGUN_ACCESS_KEY']
+MAILGUN_ACCESS_KEY = os.environ['MAILGUN_API_KEY']
 
-try:
-    from local_settings import *
-except:
-    pass
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+PIPELINE_COMPILERS = (
+    'pipeline.compilers.less.LessCompiler',
+)
+
+#PIPELINE_ENABLED = True
+
+PIPELINE_CSS = {
+    'bootstrap': {
+        'source_filenames': (
+            'less/bootstrap.less',
+        ),
+        'output_filename': 'css/bootstrap.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+    'groupie': {
+        'source_filenames': (
+            'less/style.less',
+        ),
+        'output_filename': 'css/groupie.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        }
+    }
+}
+
+PIPELINE_JS = {
+    'bootstrap': {
+        'source_filenames': (
+          'js/transition.js',
+          'js/modal.js',
+          'js/dropdown.js',
+          'js/scrollspy.js',
+          'js/tab.js',
+          'js/tooltip.js',
+          'js/popover.js',
+          'js/alert.js',
+          'js/button.js',
+          'js/collapse.js',
+          'js/carousel.js',
+          'js/affix.js',
+        ),
+        'output_filename': 'js/bootstrap.js',
+    },
+    'groupie': {
+        'source_filenames': (
+          'js/app.js',
+        ),
+        'output_filename': 'js/groupie.js',
+    }
+}
