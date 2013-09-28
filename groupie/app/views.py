@@ -5,7 +5,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from groupie.app.forms import VotingForm
-from groupie.app.models import Voter, Voting
+from groupie.app.models import Voting
+from groupie.app.voting import setup_voting
 
 
 SAMPLE_DATA = {
@@ -16,17 +17,6 @@ SAMPLE_DATA = {
     'emails': "a@a.com, b@b.com, c@c.com",
     'voting_options': "hey apple # hey orange # hey kiwi"
 }
-
-
-def setup_voting(voting):
-    # voting creator is added and automatically votes for all proposed options
-    v = Voter.objects.create(email=voting.from_email, voting=voting)
-    for vo in voting.voting_options.all():
-        vo.voters.add(v)
-
-    # TODO: send emails (remember about send_to_all)
-
-    # TODO: schedule sending of deadline reminder
 
 
 def home(request):
@@ -42,7 +32,7 @@ def home(request):
 
 
 def voting(request, vote_hash):
-    # TODO: based on ref in GET grant voting permissions 
-    # or voting/editing if creator (check voter.email=voting.from_email
+    # TODO: based on ref in GET prefill "voter" field when voting
+    # or add admin options if creator
     v = Voting.objects.get(url_hash=vote_hash)
     return render(request, 'voting.html', {'voting': v})

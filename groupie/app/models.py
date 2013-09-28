@@ -21,7 +21,7 @@ class Voting(models.Model):
     description = models.TextField()
     deadline = models.DateTimeField(blank=True, null=True)
 
-    # indicates if want to send notification emails to all emails at once (as one group email)
+    # start an email discussion
     send_to_all = models.BooleanField()
 
     def __unicode__(self):
