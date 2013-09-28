@@ -68,32 +68,57 @@ hr.divisor {
 		.title {
 			padding: 60px 0 40px 0;
 			
-			h1, h4 {
+			h1, h2, h3, h4, h5, h6 {
+				font-family: 'Oxygen', sans-serif;
+				color: @SecondTitlesColor;
 				text-shadow: 1px 1px 2px rgba(51, 51, 51,0.8);
         		filter: dropshadow(color=#000000, offx=0, offy=0);
-        	}
+	        }
+
+			a  {
+				h1 {
+					color: @SecondTitlesColor;
+
+					&:hover {
+		    			color: darken(@SecondTitlesColor, 10%);
+		        	}
+		        }
+
+				&:hover {
+	    			text-decoration: none;
+	    			cursor: pointer;
+	        	}
+			}
+			
+			
 		}
 	}
-	label {
-		font-size: 18px;
-		margin: 0;
-	}
-	
-	h1, h2, h3, h4, h5, h6 {
-		font-family: 'Oxygen', sans-serif;
-		color: @SecondTitlesColor;
-	}
-	
-	.checkbox input{
-		margin-top: 15px;
-	}
 
-	.btn-block {
-	 	margin-top: 20px;
-	 	clear: both;
-	 }
-		
-	.bootstrap-tagsinput {
-    	width: 100%;
-  	}
+	form {
+
+		label {
+			font-size: 18px;
+			margin: 0;
+		}
+		.alert {
+			font-size: 14px;
+			width: 100%;
+			display: block;
+			text-align: center;
+			padding: 3px;
+		}
+		.checkbox input{
+			margin-top: 15px;
+		}
+
+		.btn-block {
+		 	margin-top: 20px;
+		 	clear: both;
+		 }
+			
+		.bootstrap-tagsinput {
+	    	width: 100%;
+	  	}
+
+	}
 }	

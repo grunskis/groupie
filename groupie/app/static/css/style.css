@@ -59,30 +59,44 @@ hr.divisor {
   padding: 60px 0 40px 0;
 }
 .italy.jumbotron .title h1,
-.italy.jumbotron .title h4 {
+.italy.jumbotron .title h2,
+.italy.jumbotron .title h3,
+.italy.jumbotron .title h4,
+.italy.jumbotron .title h5,
+.italy.jumbotron .title h6 {
+  font-family: 'Oxygen', sans-serif;
+  color: #ecf0f1;
   text-shadow: 1px 1px 2px rgba(51, 51, 51, 0.8);
   filter: dropshadow(color=#000000, offx=0, offy=0);
 }
-.italy label {
+.italy.jumbotron .title a h1 {
+  color: #ecf0f1;
+}
+.italy.jumbotron .title a h1:hover {
+  color: #cfd9db;
+}
+.italy.jumbotron .title a:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+.italy form label {
   font-size: 18px;
   margin: 0;
 }
-.italy h1,
-.italy h2,
-.italy h3,
-.italy h4,
-.italy h5,
-.italy h6 {
-  font-family: 'Oxygen', sans-serif;
-  color: #ecf0f1;
+.italy form .alert {
+  font-size: 14px;
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding: 3px;
 }
-.italy .checkbox input {
+.italy form .checkbox input {
   margin-top: 15px;
 }
-.italy .btn-block {
+.italy form .btn-block {
   margin-top: 20px;
   clear: both;
 }
-.italy .bootstrap-tagsinput {
+.italy form .bootstrap-tagsinput {
   width: 100%;
 }
