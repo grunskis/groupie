@@ -1,1 +1,21 @@
 {% extends "base.html" %}
+
+{% load bootstrap %}
+
+
+
+{% block main %}
+
+	{{ form|bootstrap }}
+
+	<hr />
+
+	# For horizontal forms
+	{{ form|bootstrap_horizontal }}
+
+	<hr />
+
+	# Or with custom size (default is 'col-lg-2 col-sm-2')
+	{{ form|bootstrap_horizontal:'col-lg-4' }}
+
+{% endblock main %}

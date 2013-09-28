@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 
 import dj_database_url
@@ -107,6 +108,7 @@ INSTALLED_APPS = (
 
     'pipeline',
     'twitter_bootstrap',
+    'bootstrapform',
 
     'groupie.app'
 )
