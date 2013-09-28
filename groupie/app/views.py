@@ -42,7 +42,7 @@ def home(request):
 def voting(request, voting_hash):
     v = Voting.objects.get(url_hash=voting_hash)
     if request.method == 'POST':
-        vos_ids = [int(vo) for vo in request.POST['voting_options'].split(',') if vo]
+        vos_ids = [int(vo) for vo in request.POST.getlist('voting_options') if vo]
         request.voter.voted_voting_options.clear()
         vos = VotingOption.objects.filter(id__in=vos_ids, voting=v)
         for vo in vos:

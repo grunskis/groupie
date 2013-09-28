@@ -6,31 +6,32 @@
 
 	<form action='{% url 'voting' voting.url_hash %}?ref={{ voter.ref_hash }}' method="post">
 		{% csrf_token %}
-    	<input type="text" name="voting_options" value="">
+		
 	  	<input type="submit" value="vote" />
+
+		<span>Hello, {{ voter.email }}! </span> <br />
+	    <span>Here it goes: {{ voting.description }} </span> <br />
+
+	    <div> 
+			Your options are: <br />		     
+			<ul>
+		     	{% with voter.voted_voting_options.all as voted_options %} 
+			     	{% for o in voting.voting_options.all %}
+						<li>
+							<input {% if o in voted_options %}checked{% endif %} type="checkbox" name="voting_options" id="option_{{ o.id }}" value="{{ o.id }}" />
+							"{{ o }}"<br />
+							<span>
+								Voters:
+								{% for v in o.voters.all %} 
+									{{ v.email }}
+								{% endfor %}
+							</span>
+						</li>
+			     	{% endfor %}
+			     {% endwith %}
+		     </ul>
+		 </div>
+		
 	</form>
-	
-	# VOTING <br />
-     you: {{ voter.email }} <br />
-     <br />
-     from_email: {{ voting.from_email }} <br />
-     description: {{ voting.description }} <br />
-     options: 
-     <ul>
-     	{% for o in voting.voting_options.all %}
-			<li>option "[{{ o.id }}] {{ o }}": {{ o.voters.all }}</li>
-     	{% endfor %}
-     </ul>
-     <ul>
-     	{% for o in voting.voters.all %}
-			<li>voter "{{ o }}": {{ o.voted_voting_options.all }}</li>
-     	{% endfor %}
-     </ul>
-     deadline: {{ voting.deadline }} <br />
-     send to all: {{ voting.send_to_all }} <br />
-	#
-
-
-
 
 {% endblock main %}
