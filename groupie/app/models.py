@@ -14,30 +14,6 @@ def generate_hash():
             return url_hash
 
 
-def parse_emails(emails):
-    """
-    Expects emails as a comma separated list of emails (can also contain one email).
-    """
-    return [e.strip() for e in emails.split(',')]
-
-
-def parse_options(options):
-    """
-    Expects voting options as a # separated list of options (can also contain one email).
-    """
-    return [o.strip() for o in options.split('#')]
-
-
-def create_voting(emails, options, voting_dict):
-    # TODO: for testing purposes; should be in form probably
-    v = Voting.objects.create(**voting_dict)
-    for e in parse_emails(emails):
-        Voter.objects.create(voting=v, email=e)
-    for o in parse_options(options):
-        VotingOption.objects.create(voting=v, text=o)
-    return v
-
-
 class Voting(models.Model):
     url_hash = models.CharField(primary_key=True, max_length=8, default=generate_hash, editable=False)
 
@@ -55,6 +31,20 @@ class Voting(models.Model):
         # TODO: makes some smart aggregation here
         scores = ["{} [{}]".format(o, o.voters.count()) for o in self.voting_options.all()]
         return u', '.join(scores)
+
+    @classmethod
+    def parse_emails(cls, emails):
+        """
+        Expects emails as a comma separated list of emails (can also contain one email).
+        """
+        return [e.strip() for e in emails.split(',')]
+
+    @classmethod
+    def parse_options(cls, options):
+        """
+        Expects voting options as a # separated list of options (can also contain one email).
+        """
+        return [o.strip() for o in options.split('#')]
 
 
 ## VOTING OPTION ##
