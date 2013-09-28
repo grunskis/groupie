@@ -7,7 +7,6 @@
 	<form action='{% url 'voting' voting.url_hash %}?ref={{ voter.ref_hash }}' method="post">
 		{% csrf_token %}
 		
-	  	<input type="submit" value="vote" />
 
 		<span>Hello, {{ voter.email }}! </span> <br />
 	    <span>Here it goes: {{ voting.description }} </span> <br />
@@ -21,7 +20,7 @@
 							<input {% if o in voted_options %}checked{% endif %} type="checkbox" name="voting_options" id="option_{{ o.id }}" value="{{ o.id }}" />
 							"{{ o }}"<br />
 							<span>
-								Voters:
+								Voters ({{ o.voters.all|length }}):
 								{% for v in o.voters.all %} 
 									{{ v.email }}
 								{% endfor %}
@@ -31,6 +30,7 @@
 			     {% endwith %}
 		     </ul>
 		 </div>
+	  	<input type="submit" value="vote" />
 		
 	</form>
 
