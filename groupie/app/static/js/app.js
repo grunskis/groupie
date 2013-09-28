@@ -16,10 +16,11 @@ $(function() {
         $('#voting_option_' + $datepickers.length).datetimepicker(
             datetimepickerOptions);
 
+        $('.remove').click(function () {
+            $(this).parent().remove();
+        });
+
         return false;
     });
 
-    $('.voting-option .remove').on('click', function () {
-        $(this).remove();
-    });
 });
