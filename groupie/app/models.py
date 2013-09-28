@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import string
 import random
+import string
 
 from django.db import models
 
@@ -118,4 +118,4 @@ class Voter(models.Model):
 # 
 # vote(vrs[0], os[0])
 # 
-# v   
+# v
