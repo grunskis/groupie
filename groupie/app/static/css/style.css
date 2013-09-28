@@ -76,6 +76,7 @@ hr.divisor {
 }
 .italy .btn-block {
   margin-top: 20px;
+  clear: both;
 }
 .italy .bootstrap-tagsinput {
   width: 100%;
