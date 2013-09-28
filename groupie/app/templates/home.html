@@ -6,16 +6,10 @@
 
 {% block main %}
 
-	{{ form|bootstrap }}
-
-	<hr />
-
-	# For horizontal forms
-	{{ form|bootstrap_horizontal }}
-
-	<hr />
-
-	# Or with custom size (default is 'col-lg-2 col-sm-2')
-	{{ form|bootstrap_horizontal:'col-lg-4' }}
+	<form action='.' method='post'>
+		{% csrf_token %}
+		{{ form|bootstrap }}
+		<input class="btn-primary" type="submit" name="create" value="create" />
+	</form>
 
 {% endblock main %}
