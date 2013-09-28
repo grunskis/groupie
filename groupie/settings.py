@@ -155,7 +155,7 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
 PIPELINE_CSS_COMPRESSOR = None
 
-PIPELINE_ENABLED = True
+#PIPELINE_ENABLED = True
 
 PIPELINE_CSS = {
     'bootstrap': {
