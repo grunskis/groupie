@@ -39,6 +39,7 @@ hr.divisor {
   background: rgba(0, 0, 0, 0.6);
   border-radius: 2px;
   -webkit-border-radius: 2px;
+  padding-bottom: 10px;
 }
 .form-style label {
   color: #ecf0f1;
