@@ -3,6 +3,11 @@
 /** Colors **/
 body {
   background: #ecf0f1;
+  color: #7f8c8d;
+}
+p,
+ul li {
+  color: #7f8c8d;
 }
 h1,
 h2,
@@ -11,29 +16,51 @@ h4,
 h5,
 h6 {
   font-family: 'Oxygen', sans-serif;
-  color: #34495e;
+  color: #c0392b;
 }
-.marketing.container {
+footer {
+  margin-bottom: 20px;
+}
+hr.divisor {
+  margin: 80px 0 40px 0;
+  height: 1px;
+  background: #bdc3c7;
+}
+.how-it-works.container {
   text-align: center;
+  margin-top: 40px;
 }
-.dark {
-  margin: -115px 0 10px 0;
-  opacity: 0.9;
-  background: #2c3e50;
-}
-.dark h1,
-.dark h2,
-.dark h3,
 .dark h4,
 .dark h5,
 .dark h6 {
+  color: #7f8c8d;
+}
+.form-style {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  padding-bottom: 10px;
+}
+.form-style label {
   color: #ecf0f1;
+  font-weight: normal;
 }
 .italy {
-  background: url(../img/group-travel.jpg) center center;
-  height: 610px;
+  background: url(../img/group-travel02.jpg) left bottom;
   width: 100%;
 }
 .italy label {
   font-size: 18px;
+}
+.italy h1,
+.italy h2,
+.italy h3,
+.italy h4,
+.italy h5,
+.italy h6 {
+  font-family: 'Oxygen', sans-serif;
+  color: #ecf0f1;
+}
+.italy .checkbox input {
+  margin-top: 15px;
 }

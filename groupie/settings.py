@@ -1,13 +1,15 @@
+# -*- coding: utf-8 -*-
 import os
 
 import dj_database_url
 
 
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', False)
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Martins Grunskis', 'martins@grunskis.com'),
+    ('Mateusz Jankowski', 'mat.jankowski@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -107,6 +109,9 @@ INSTALLED_APPS = (
 
     'pipeline',
     'twitter_bootstrap',
+    'bootstrapform',
+    'raven.contrib.django.raven_compat',
+    'jstemplate',
 
     'groupie.app'
 )
@@ -149,16 +154,15 @@ MAILGUN_ACCESS_KEY = os.environ['MAILGUN_API_KEY']
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
-PIPELINE_COMPILERS = (
-    'pipeline.compilers.less.LessCompiler',
-)
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
+PIPELINE_CSS_COMPRESSOR = None
 
 #PIPELINE_ENABLED = True
 
 PIPELINE_CSS = {
     'bootstrap': {
         'source_filenames': (
-            'less/bootstrap.less',
+            'lib/bootstrap/css/bootstrap.min.css',
         ),
         'output_filename': 'css/bootstrap.css',
         'extra_context': {
@@ -167,7 +171,8 @@ PIPELINE_CSS = {
     },
     'groupie': {
         'source_filenames': (
-            'less/style.less',
+            'css/datetimepicker.css',
+            'css/style.css',
         ),
         'output_filename': 'css/groupie.css',
         'extra_context': {
@@ -194,10 +199,22 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/bootstrap.js',
     },
+    'libs': {
+        'source_filenames': (
+            'lib/mustache.js',
+            'libs/django.mustache.js',
+            'js/bootstrap-datetimepicker.js'
+        ),
+        'output_filename': 'js/libs.js'
+    },
     'groupie': {
         'source_filenames': (
-          'js/app.js',
+            'js/app.js',
         ),
-        'output_filename': 'js/groupie.js',
+        'output_filename': 'js/groupie.js'
     }
+}
+
+RAVEN_CONFIG = {
+    'dsn': os.environ.get('SENTRY_DSN'),
 }

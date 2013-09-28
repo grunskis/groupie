@@ -8,19 +8,23 @@
     {% compressed_css 'bootstrap' %}
     {% compressed_css 'groupie' %}
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <script src="//code.jquery.com/jquery.js"></script>
     <!--[if lt IE 9]>
       <script src="{% static 'lib/html5shiv/js/html5shiv.js' %}"></script>
       <script src="{% static 'lib/respond/js/respond.js' %}"></script>
     <![endif]-->
+    {% compressed_js 'libs' %}
   </head>
   <body>
   <div class="jumbotron italy">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-7">
           <h1>Welcome to Groupie!</h1>
           <h4>Manage groups ideas for events, trips and anything else!</h4>
+        </div>
+        <div class="col-lg-5 form-style">
+          {% block main %}{% endblock main %}
         </div>
       </div>
     </div>
@@ -35,24 +39,35 @@
       </div>
     </div>
   </div>
-  <div class="container marketing">
+  <div class="container how-it-works">
     <div class="row">
       <div class="col-sm-4">
-        <img src="static/img/organize-icon.png">
-        <h3>Organize group events<br> and trips</h3>
+        <img src="{% static 'img/organize-icon.png' %}">
+        <h4>Organize group events<br> and trips</h4>
       </div>
       <div class="col-sm-4">
-         <img src="static/img/comments-icon.png">
-        <h3>Add comments directly<br> from emails</h3>
+         <img src="{% static 'img/comments-icon.png' %}">
+        <h4>Add comments directly<br> from emails</h4>
       </div>
       <div class="col-sm-4">
-        <img src="static/img/notifications-icon.png">
-        <h3>Send reminders and summarize emails to all group</h3>
+        <img src="{% static 'img/notifications-icon.png' %}">
+        <h4>Send reminders and summarize emails to all group</h4>
       </div>
     </div>
   </div>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <hr class="col-sm-12 divisor">
+      </div>
+      <div class="row">
+      <div class="col-sm-10">© 2013 Groupie manager</div>
+      <div class="col-sm-2 text-right"><a href="http://djangodash.com/teams/c4/puccis/">Django Dash 2013</a></div>
+      
+      </div>
+    </div>
+  </footer>
 
-    <script src="//code.jquery.com/jquery.js"></script>
     {% compressed_js 'bootstrap' %}
     {% compressed_js 'groupie' %}
   </body>
