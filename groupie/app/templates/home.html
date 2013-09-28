@@ -6,6 +6,10 @@
 
 {% block main %}
 
-	{{ form|bootstrap }}
+	<form action='.' method='post'>
+		{% csrf_token %}
+		{{ form|bootstrap }}
+		<input class="btn-primary" type="submit" name="create" value="create" />
+	</form>
 
 {% endblock main %}

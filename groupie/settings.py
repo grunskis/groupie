@@ -211,4 +211,3 @@ PIPELINE_JS = {
 RAVEN_CONFIG = {
     'dsn': 'https://92933347be644c848da313d07b489c2a:ac141b8954e440eea446ec686fe3aada@app.getsentry.com/13645',
 }
-
