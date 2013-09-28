@@ -23,4 +23,5 @@ $(function() {
         return false;
     });
 
+    $('#id_emails').tagsinput();
 });

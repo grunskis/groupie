@@ -64,3 +64,6 @@ hr.divisor {
 .italy .checkbox input {
   margin-top: 15px;
 }
+.bootstrap-tagsinput {
+    width: 100%;
+}
