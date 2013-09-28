@@ -23,5 +23,10 @@ $(function() {
         return false;
     });
 
-    $('#id_emails').tagsinput();
+    $('#id_emails').tagsinput({
+        tagClass: function(item) {
+            return (/(.+)@(.+){2,}\.(.+){2,}/.test(item) ? 'label-success' : 'label-danger');
+        }
+    });
 });
+
