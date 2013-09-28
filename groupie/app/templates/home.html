@@ -9,6 +9,12 @@
 	<form action='.' method='post'>
 		{% csrf_token %}
 		{{ form|bootstrap }}
+
+		<p class="datepair" data-language="javascript">
+			<input type="text" class="date">
+			<input type="text" class="time">
+		</p>
+
 		<input class="btn-primary" type="submit" name="create" value="create" />
 	</form>
 

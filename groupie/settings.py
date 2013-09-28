@@ -202,6 +202,9 @@ PIPELINE_JS = {
     'groupie': {
         'source_filenames': (
           'js/app.js',
+          'lib/timepicker/jquery.timepicker.min.js',
+          'lib/timepicker/lib/base.js',
+          'lib/timepicker/lib/datepair.js'
         ),
         'output_filename': 'js/groupie.js',
     }
