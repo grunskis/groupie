@@ -1,20 +1,20 @@
-//Add new dates and times
-
 $(function() {
-        var scntDiv = $('#p_scents');
-        var i = $('#p_scents p').size() + 1;
-        
-        $('#add-dates').live('click', function() {
-                $('<p><label for="p_scnts"><input type="text" id="p_scnt" size="20" name="p_scnt_' + i +'" value="" placeholder="Input Value" /></label> <a href="#" id="remScnt">Remove</a></p>').appendTo(scntDiv);
+        var scntDiv = $('#date-picker');
+        var i = $('#add-dates p').size() + 1;
+
+        $('#add-dates').on('click', function() {
+                
+                
+                $('<p id="date-picker' + i +'" class="datepair" data-language="javascript"><input id="date-' + i +' " name="date-' + i +'" type="text" class="date"><input id="time-" name="time-" type="text" class="time"><a href="#" id="rem-dates">Remove</a></p>').insertAfter(scntDiv);
                 i++;
                 return false;
         });
-        
-        $('#rem-dates').live('click', function() { 
+
+        $('#rem-dates').on('click', function() { 
                 if( i > 2 ) {
                         $(this).parents('p').remove();
                         i--;
                 }
                 return false;
-        });
+        }); 
 });
