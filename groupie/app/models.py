@@ -32,6 +32,10 @@ class Voting(models.Model):
         scores = ["{} [{}]".format(o, o.voters.count()) for o in self.voting_options.all()]
         return u', '.join(scores)
 
+    @property
+    def creator(self):
+        return self.voters.get(email=self.from_email)
+
 
 ## VOTING OPTION ##
 
@@ -47,23 +51,18 @@ class VotingOption(models.Model):
 ## VOTER ##
 
 
-def vote(voter, option):
-    # TODO: for testing purposes; should be in form probably
-    option.voters.add(voter)
-
-
 def generate_ref():
     while True:
-        url_ref = ''.join(random.sample(string.ascii_letters + string.digits, 8))
-        if not Voter.objects.filter(url_ref=url_ref).exists():
-            return url_ref
+        ref_hash = ''.join(random.sample(string.ascii_letters + string.digits, 8))
+        if not Voter.objects.filter(ref_hash=ref_hash).exists():
+            return ref_hash
 
 
 class Voter(models.Model):
     voting = models.ForeignKey(Voting, related_name='voters')
-    options = models.ManyToManyField(VotingOption, related_name='voters')
+    voted_voting_options = models.ManyToManyField(VotingOption, related_name='voters')
 
-    url_ref = models.CharField(primary_key=True, max_length=8, default=generate_ref, editable=False)
+    ref_hash = models.CharField(primary_key=True, max_length=8, default=generate_ref, editable=False)
     email = models.EmailField()
 
     def __unicode__(self):
