@@ -46,7 +46,7 @@ class MultiOptionsField(forms.Field):
         return self._parse_options(value)
 
 
-class VotingForm(forms.ModelForm):
+class VotingAddForm(forms.ModelForm):
     emails = MultiEmailField()
 
     class Meta:
@@ -55,7 +55,7 @@ class VotingForm(forms.ModelForm):
 
     def clean(self, *args, **kwargs):
         # TODO: check if deadline is not later then the closest option
-        return super(VotingForm, self).clean(*args, **kwargs)
+        return super(VotingAddForm, self).clean(*args, **kwargs)
 
     def save(self, *args, **kwargs):
         emails = self.cleaned_data.pop('emails')

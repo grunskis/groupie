@@ -30,11 +30,6 @@ hr.divisor {
   text-align: center;
   margin-top: 40px;
 }
-.dark {
-  margin: -30px 0 10px 0;
-  /*background: @BackgroundColor;*/
-
-}
 .dark h4,
 .dark h5,
 .dark h6 {
@@ -42,13 +37,15 @@ hr.divisor {
 }
 .form-style {
   background: rgba(0, 0, 0, 0.6);
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
 }
 .form-style label {
   color: #ecf0f1;
   font-weight: normal;
 }
 .italy {
-  background: url(../img/group-travel02.jpg) left center;
+  background: url(../img/group-travel02.jpg) left bottom;
   width: 100%;
 }
 .italy h1,
