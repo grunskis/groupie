@@ -2,35 +2,62 @@
 
 /** Variables **/
 /** Colors **/
-@TitlesColor: #34495e;
-@SecondTitlesColor: #ecf0f1;
-@TextColor: #2c3e50;
-@BackgroundColor: #ecf0f1;
-@SecondBackgroundColor: #2c3e50;
+@TitlesColor: rgba(192, 57, 43,1.0);
+@SecondTitlesColor: rgba(236, 240, 241,1.0);
+@LabelColor: rgba(236, 240, 241,1.0);
+@TextColor: rgba(127, 140, 141,1.0);
+@BackgroundColor: rgba(236, 240, 241,1.0);
+@SecondBackgroundColor: rgba(0, 0, 0,0.6);
+@DivisorColor: rgba(189, 195, 199,1.0);
+@Black: rgba(51, 51, 51,1.0);
 
 body {
 	background: @BackgroundColor;
+	color: @TextColor;
+}
+p, ul li {
+	color: @TextColor;
 }
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Oxygen', sans-serif;
 	color: @TitlesColor;
 }
 
-.marketing.container { 
+footer { margin-bottom: 20px;}
+
+hr.divisor {
+	margin: 80px 0 40px 0;
+	height: 1px;
+	background: @DivisorColor;
+}
+.how-it-works.container { 
 	text-align: center;
+	margin-top: 40px;
 }
 
 .dark {
-	margin: -115px 0 10px 0;
-	opacity: 0.9;
-	background: @SecondBackgroundColor;
+	margin: -30px 0 10px 0;
+	/*background: @BackgroundColor;*/
 
-	h1, h2, h3, h4, h5, h6 {
-		color: @SecondTitlesColor;
+	h4, h5, h6 {
+		color: @TextColor;
 	}
 }
+.form-style {
+	background: @SecondBackgroundColor;
+
+	label { 
+		color: @LabelColor;
+		font-weight: normal;
+	}
+}
+
 .italy {
-	background:url(../img/group-travel.jpg) center center;
-	height: 610px;
+	background:url(../img/group-travel02.jpg) left center;
 	width: 100%;
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Oxygen', sans-serif;
+		color: @SecondTitlesColor;
+	}
 }
