@@ -43,7 +43,7 @@ class VotingAddForm(forms.ModelForm):
     def clean(self, *args, **kwargs):
         cleaned_data = super(VotingAddForm, self).clean(*args, **kwargs)
 
-        # manually cleaning deadlins
+        # manually cleaning deadline
         d = self.data.get('deadline')
         if d:
             d = datetime.strptime(d, '%d/%m/%Y %H:%M').strftime('%Y-%m-%d %H:%M')
@@ -52,12 +52,14 @@ class VotingAddForm(forms.ModelForm):
         # manually cleaning voting options
         vos = self.data.getlist('voting_options')
         if not vos:
-            raise forms.ValidationError('Voting options missing')
+            self._errors["voting_options"] = "Voting options missing"
         cleaned_data.update({'voting_options': vos})
 
         # removing creator from invited
-        self.cleaned_data['emails'] = \
-            [e for e in self.cleaned_data['emails'] if not e == self.cleaned_data['from_email']]
+        emails = [e for e in self.cleaned_data.get('emails', []) if not e == self.cleaned_data['from_email']]
+        if not emails:
+            self._errors["emails"] = "This field is required"
+        cleaned_data.update({'emails': emails})
 
         # TODO: check if deadline is not later then the closest option
         return cleaned_data
