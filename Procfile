@@ -1,1 +1,1 @@
-web: gunicorn groupie.wsgi
+web: python manage.py collectstatic —noinput; gunicorn groupie.wsgi
