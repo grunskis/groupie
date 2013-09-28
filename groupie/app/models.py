@@ -29,6 +29,7 @@ class Voting(models.Model):
         Returns a snapshot of current scores.
         """
         # TODO: makes some smart aggregation here
+        # and basically check all other places where related managers are called...
         scores = ["{} [{}]".format(o, o.voters.count()) for o in self.voting_options.all()]
         return u', '.join(scores)
 
