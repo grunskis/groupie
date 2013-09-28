@@ -153,12 +153,15 @@ MAILGUN_ACCESS_KEY = os.environ['MAILGUN_API_KEY']
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
+PIPELINE_CSS_COMPRESSOR = None
+
 PIPELINE_ENABLED = True
 
 PIPELINE_CSS = {
     'bootstrap': {
         'source_filenames': (
-            'lib/bootstrap/css/bootstrap.css',
+            'lib/bootstrap/css/bootstrap.min.css',
         ),
         'output_filename': 'css/bootstrap.css',
         'extra_context': {
