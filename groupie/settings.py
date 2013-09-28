@@ -24,9 +24,7 @@ ALLOWED_HOSTS = ['*']
 
 BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
@@ -113,6 +111,7 @@ INSTALLED_APPS = (
     'twitter_bootstrap',
     'bootstrapform',
     'raven.contrib.django.raven_compat',
+    'jstemplate',
 
     'groupie.app'
 )
@@ -158,7 +157,7 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
 PIPELINE_CSS_COMPRESSOR = None
 
-PIPELINE_ENABLED = True
+#PIPELINE_ENABLED = True
 
 PIPELINE_CSS = {
     'bootstrap': {
@@ -172,6 +171,7 @@ PIPELINE_CSS = {
     },
     'groupie': {
         'source_filenames': (
+            'css/datetimepicker.css',
             'css/style.css',
         ),
         'output_filename': 'css/groupie.css',
@@ -199,12 +199,17 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/bootstrap.js',
     },
+    'libs': {
+        'source_filenames': (
+            'lib/mustache.js',
+            'libs/django.mustache.js',
+            'js/bootstrap-datetimepicker.js'
+        ),
+        'output_filename': 'js/libs.js'
+    },
     'groupie': {
         'source_filenames': (
-          'js/app.js',
-          'lib/timepicker/jquery.timepicker.min.js',
-          'lib/timepicker/lib/base.js',
-          'lib/timepicker/lib/datepair.js'
+            'js/app.js',
         ),
         'output_filename': 'js/groupie.js'
     }
