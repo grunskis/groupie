@@ -158,7 +158,7 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
 PIPELINE_CSS_COMPRESSOR = None
 
-PIPELINE_ENABLED = True
+#PIPELINE_ENABLED = True
 
 PIPELINE_CSS = {
     'bootstrap': {
@@ -173,6 +173,8 @@ PIPELINE_CSS = {
     'groupie': {
         'source_filenames': (
             'css/style.css',
+            'lib/timepicker/jquery.timepicker.css',
+            'lib/timepicker/lib/base.css'
         ),
         'output_filename': 'css/groupie.css',
         'extra_context': {
@@ -201,10 +203,10 @@ PIPELINE_JS = {
     },
     'groupie': {
         'source_filenames': (
-          'js/app.js',
           'lib/timepicker/jquery.timepicker.min.js',
           'lib/timepicker/lib/base.js',
-          'lib/timepicker/lib/datepair.js'
+          'lib/timepicker/lib/datepair.js',
+          'js/app.js'
         ),
         'output_filename': 'js/groupie.js'
     }
