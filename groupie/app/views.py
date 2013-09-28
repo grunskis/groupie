@@ -4,12 +4,9 @@ from functools import wraps
 
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.utils import simplejson
 from django.views.decorators.http import require_http_methods
-from jsonview.decorators import json_view
 
-
-from groupie.app.forms import VotingForm
+from groupie.app.forms import VotingAddForm
 from groupie.app.models import Voting, Voter, VotingOption
 from groupie.app.voting import setup_voting
 
@@ -42,18 +39,18 @@ def voter_from_referer(function):
 @require_http_methods(["GET", "POST"])
 def home(request):
     if request.method == 'POST':
-        form = VotingForm(request.POST)
+        form = VotingAddForm(request.POST)
         if form.is_valid():
             voting = form.save()
             setup_voting(voting)
             # TODO: use reverse
             return HttpResponseRedirect('/{}?ref={}'.format(voting.url_hash, voting.creator.ref_hash))
     else:
-        form = VotingForm(initial=SAMPLE_DATA)
+        form = VotingAddForm(initial=SAMPLE_DATA)
     return render(request, 'home.html', {'form': form})
 
 
-@require_http_methods(["GET"])
+@require_http_methods(["GET", "POST"])
 @voter_from_referer
 def voting(request, vote_hash):
     v = Voting.objects.get(url_hash=vote_hash)
@@ -61,38 +58,28 @@ def voting(request, vote_hash):
         {'voting': v, 'voter': request.voter, 'is_creator': request.voter == v.creator})
 
 
-@json_view
-@voter_from_referer
-def vote_up(request, vote_hash):
-    # TODO: do it do it
-    return {'status': 'ok'}
-
-
-@json_view
-@voter_from_referer
-def vote_down(request, vote_hash):
-    # TODO: do it do it
-    return {'status': 'ok'}
-
-
-@json_view
-@voter_from_referer
-def option_add(request, vote_hash):
-    try:
-        v = Voting.objects.get(url_hash=vote_hash)
-    except Voting.DoesNotExist:
-        return {'status': 'error', 'error': 'Voting does not exist'}
-
-    data = simplejson.loads(request.raw_post_data)
-    try:
-        vo_text = data['voting_option']
-    except KeyError:
-        return {'status': 'fail', 'error': '"voting_option" missing in request JSON'}
-
-    if not vo_text:
-        return {'status': 'fail', 'error': '"voting_option" empty in request JSON'}
-
-    vo = VotingOption.objects.create(text=vo_text)
-    v.voting_options.add(vo)
-
-    return {'status': 'ok'}
+# from django.utils import simplejson
+# from jsonview.decorators import json_view
+#
+#
+# @json_view
+# @voter_from_referer
+# def option_add(request, vote_hash):
+#     try:
+#         v = Voting.objects.get(url_hash=vote_hash)
+#     except Voting.DoesNotExist:
+#         return {'status': 'error', 'error': 'Voting does not exist'}
+#
+#     data = simplejson.loads(request.raw_post_data)
+#     try:
+#         vo_text = data['voting_option']
+#     except KeyError:
+#         return {'status': 'fail', 'error': '"voting_option" missing in request JSON'}
+#
+#     if not vo_text:
+#         return {'status': 'fail', 'error': '"voting_option" empty in request JSON'}
+#
+#     vo = VotingOption.objects.create(text=vo_text)
+#     v.voting_options.add(vo)
+#
+#     return {'status': 'ok'}
