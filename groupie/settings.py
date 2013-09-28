@@ -145,7 +145,7 @@ LOGGING = {
 EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
 
 MAILGUN_SERVER_NAME = 'groupie.mailgun.org'
-MAILGUN_ACCESS_KEY = os.environ['MAILGUN_ACCESS_KEY']
+MAILGUN_ACCESS_KEY = os.environ['MAILGUN_API_KEY']
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
