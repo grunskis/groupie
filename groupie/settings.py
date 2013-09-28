@@ -107,6 +107,7 @@ INSTALLED_APPS = (
 
     'pipeline',
     'twitter_bootstrap',
+    'raven.contrib.django.raven_compat',
 
     'groupie.app'
 )
@@ -200,4 +201,9 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/groupie.js',
     }
+}
+
+
+RAVEN_CONFIG = {
+    'dsn': 'https://92933347be644c848da313d07b489c2a:ac141b8954e440eea446ec686fe3aada@app.getsentry.com/13645',
 }
