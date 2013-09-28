@@ -30,32 +30,23 @@ class MultiEmailField(forms.Field):
             validate_email(email)
 
 
-class MultiOptionsField(forms.Field):
-    def _parse_options(self, options):
-        """
-        Expects voting options as a # separated list of options (can also contain one email).
-        """
-        return [o.strip() for o in options.split('#')]
-
-    def to_python(self, value):
-        "Normalize data to a list of strings."
-
-        # Return an empty list if no input was given.
-        if not value:
-            return []
-        return self._parse_options(value)
-
-
 class VotingAddForm(forms.ModelForm):
     emails = MultiEmailField()
 
     class Meta:
         model = Voting
+        # TODO: handle 'deadlint' and 'voting_options' properly
         exclude = ('deadline', 'voting_options')
 
     def clean(self, *args, **kwargs):
+        # TODO: handle 'deadlint' and 'voting_options' properly
+        cleaned_data = super(VotingAddForm, self).clean(*args, **kwargs)
+        vos = self.data.getlist('voting_option')
+        if not vos:
+            raise forms.ValidationError('Voting options missing')
+        cleaned_data.update({'voting_options': vos})
+        return cleaned_data
         # TODO: check if deadline is not later then the closest option
-        return super(VotingAddForm, self).clean(*args, **kwargs)
 
     def save(self, *args, **kwargs):
         emails = self.cleaned_data.pop('emails')
