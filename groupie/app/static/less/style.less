@@ -10,6 +10,7 @@
 @SecondBackgroundColor: rgba(0, 0, 0,0.6);
 @DivisorColor: rgba(189, 195, 199,1.0);
 @Black: rgba(51, 51, 51,1.0);
+@RadiusCorner: 2px;
 
 body {
 	background: @BackgroundColor;
@@ -36,8 +37,6 @@ hr.divisor {
 }
 
 .dark {
-	margin: -30px 0 10px 0;
-	/*background: @BackgroundColor;*/
 
 	h4, h5, h6 {
 		color: @TextColor;
@@ -45,6 +44,8 @@ hr.divisor {
 }
 .form-style {
 	background: @SecondBackgroundColor;
+	border-radius: @RadiusCorner;
+	-webkit-border-radius: @RadiusCorner;
 
 	label { 
 		color: @LabelColor;
@@ -53,11 +54,11 @@ hr.divisor {
 }
 
 .italy {
-	background:url(../img/group-travel02.jpg) left center;
+	background:url(../img/group-travel02.jpg) left bottom;
 	width: 100%;
 
 	h1, h2, h3, h4, h5, h6 {
 		font-family: 'Oxygen', sans-serif;
 		color: @SecondTitlesColor;
 	}
-}
+}	
