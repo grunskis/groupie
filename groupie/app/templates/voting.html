@@ -4,14 +4,21 @@
 
 {% block main %}
 
+	<form action='{% url 'voting' voting.url_hash %}?ref={{ voter.ref_hash }}' method="post">
+		{% csrf_token %}
+    	<input type="text" name="voting_options" value="">
+	  	<input type="submit" value="vote" />
+	</form>
 	
 	# VOTING <br />
+     you: {{ voter.email }} <br />
+     <br />
      from_email: {{ voting.from_email }} <br />
      description: {{ voting.description }} <br />
      options: 
      <ul>
      	{% for o in voting.voting_options.all %}
-			<li>option "{{ o }}": {{ o.voters.all }}</li>
+			<li>option "[{{ o.id }}] {{ o }}": {{ o.voters.all }}</li>
      	{% endfor %}
      </ul>
      <ul>
@@ -22,5 +29,8 @@
      deadline: {{ voting.deadline }} <br />
      send to all: {{ voting.send_to_all }} <br />
 	#
+
+
+
 
 {% endblock main %}

@@ -15,10 +15,7 @@ def static(prefix, **kwargs):
 
 urlpatterns = patterns('',
     url(r'^$', 'groupie.app.views.home', name='home'),
-    url(r'^(?P<vote_hash>[a-zA-Z0-9]{8})$', 'groupie.app.views.voting', name='voting'),
-    url(r'^(?P<vote_hash>[a-zA-Z0-9]{8})/vote-up$', 'groupie.app.views.vote_up', name='vote_up'),
-    url(r'^(?P<vote_hash>[a-zA-Z0-9]{8})/vote-down$', 'groupie.app.views.vote_down', name='vote_down'),
-    url(r'^(?P<vote_hash>[a-zA-Z0-9]{8})/option-add$', 'groupie.app.views.option_add', name='option_add'),
+    url(r'^(?P<voting_hash>[a-zA-Z0-9]{8})$', 'groupie.app.views.voting', name='voting'),
     url(r'^admin/', include(admin.site.urls)),
 )
 

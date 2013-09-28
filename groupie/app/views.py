@@ -52,10 +52,21 @@ def home(request):
 
 @require_http_methods(["GET", "POST"])
 @voter_from_referer
-def voting(request, vote_hash):
-    v = Voting.objects.get(url_hash=vote_hash)
-    return render(request, 'voting.html',
-        {'voting': v, 'voter': request.voter, 'is_creator': request.voter == v.creator})
+def voting(request, voting_hash):
+    v = Voting.objects.get(url_hash=voting_hash)
+    if request.method == 'POST':
+        vos_ids = [int(vo) for vo in request.POST['voting_options'].split(',') if vo]
+        request.voter.voted_voting_options.clear()
+        vos = VotingOption.objects.filter(id__in=vos_ids, voting=v)
+        for vo in vos:
+            vo.voters.add(request.voter)
+
+    ctx = {
+        'voting': v,
+        'voter': request.voter,
+        'is_creator': request.voter == v.creator
+    }
+    return render(request, 'voting.html', ctx)
 
 
 # from django.utils import simplejson
@@ -64,9 +75,9 @@ def voting(request, vote_hash):
 #
 # @json_view
 # @voter_from_referer
-# def option_add(request, vote_hash):
+# def option_add(request, voting_hash):
 #     try:
-#         v = Voting.objects.get(url_hash=vote_hash)
+#         v = Voting.objects.get(url_hash=voting_hash)
 #     except Voting.DoesNotExist:
 #         return {'status': 'error', 'error': 'Voting does not exist'}
 #

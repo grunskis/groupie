@@ -6,7 +6,8 @@
 
 {% mustachejs "datetimepicker" %}
 
-<form action="." method="post">{% csrf_token %}
+<form action="{% url 'home' %}" method="post">
+  {% csrf_token %}
   {{ form|bootstrap }}
 
   <div class="datetimepicker input-append date" id="datetimepicker_0" data-date-format="dd/mm/yyyy hh:ii">
