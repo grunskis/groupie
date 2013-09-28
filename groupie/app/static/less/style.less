@@ -1,18 +1,36 @@
 @import url(http://fonts.googleapis.com/css?family=Oxygen:400,300);
 
+/** Variables **/
+/** Colors **/
+@TitlesColor: #34495e;
+@SecondTitlesColor: #ecf0f1;
+@TextColor: #2c3e50;
+@BackgroundColor: #ecf0f1;
+@SecondBackgroundColor: #2c3e50;
+
+body {
+	background: @BackgroundColor;
+}
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Oxygen', sans-serif;
-	color: #2c3e50;
+	color: @TitlesColor;
 }
 
 .marketing.container { 
 	text-align: center;
 }
 
-.italy {
-	background: #2980b9;
-	/*height: 610px;*/
+.dark {
+	margin: -115px 0 10px 0;
+	opacity: 0.9;
+	background: @SecondBackgroundColor;
+
 	h1, h2, h3, h4, h5, h6 {
-		color: #ecf0f1;
+		color: @SecondTitlesColor;
 	}
+}
+.italy {
+	background:url(../img/group-travel.jpg) center center;
+	height: 610px;
+	width: 100%;
 }
