@@ -52,13 +52,13 @@ class VotingAddForm(forms.ModelForm):
         # manually cleaning voting options
         vos = self.data.getlist('voting_options')
         if not vos:
-            self._errors["voting_options"] = "Voting options missing"
+            self._errors["voting_options"] = ["Voting options missing"]
         cleaned_data.update({'voting_options': vos})
 
         # removing creator from invited
         emails = [e for e in self.cleaned_data.get('emails', []) if not e == self.cleaned_data['from_email']]
         if not emails:
-            self._errors["emails"] = "This field is required"
+            self._errors["emails"] = ["This field is required"]
         cleaned_data.update({'emails': emails})
 
         # TODO: check if deadline is not later then the closest option
