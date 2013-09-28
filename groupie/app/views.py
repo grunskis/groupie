@@ -53,10 +53,14 @@ def voting(request, voting_hash):
         for vo in vos:
             vo.voters.add(request.voter)
 
+    vos = sorted(v.voting_options.all(), key=lambda vo: vo.voters.count(), reverse=True)
+    voting_options_sorted = [[vo, vo.voters.count() == vos[0].voters.count()] for vo in vos]
+
     ctx = {
         'voting': v,
         'voter': request.voter,
-        'is_creator': request.voter == v.creator
+        'is_creator': request.voter == v.creator,
+        'voting_options_sorted': voting_options_sorted
     }
     return render(request, 'voting.html', ctx)
 

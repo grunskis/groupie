@@ -37,10 +37,10 @@ class VotingAddForm(forms.ModelForm):
 
     class Meta:
         model = Voting
-        # TODO: handle 'deadlint' and 'voting_options' properly
         exclude = ('deadline', 'voting_options')
 
     def clean(self, *args, **kwargs):
+        # TODO: rebuild the whole form either to have it build fully from backend or frontend
         cleaned_data = super(VotingAddForm, self).clean(*args, **kwargs)
 
         # manually cleaning deadline
