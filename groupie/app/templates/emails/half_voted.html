@@ -1,13 +1,16 @@
+We are getting there...  Most of the people have already responded.
+
 [?] {{ voting.description }}
 
+
+Click here -> {{ voting_url }} <- here!
+
 {% for vo in voting.voting_options.all %}
-	{{ forloop.counter }}. {{ vo.option }}
+	{{ forloop.counter }}. [{{ vo.voters.count }}] {{ vo.option }}
 {% endfor %}
 
 
-Follow {{ voting_url }} to let me know what you choose. 
-
-Thank you :)
+Please, don't make me ask you to give me feedback one more time. I'm a busy man, you know :)
 
 
 ┏(-_-)┛┗(-_-﻿ )┓┗(-_-)┛┏(-_-)┓ 

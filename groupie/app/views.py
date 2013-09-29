@@ -6,7 +6,7 @@ from django.views.decorators.http import require_http_methods
 from groupie.app import utils
 from groupie.app.forms import VotingAddForm
 from groupie.app.models import Voting, Voter, VotingOption
-from groupie.app.voting import setup_voting
+from groupie.app.voting import setup_voting, vote
 
 
 @require_http_methods(["GET", "POST"])
@@ -35,10 +35,8 @@ def voting(request, voting_hash):
     v = Voting.objects.get(url_hash=voting_hash)
     if request.method == 'POST':
         vos_ids = [int(vo) for vo in request.POST.getlist('voting_options') if vo]
-        voter.voted_voting_options.clear()
         vos = VotingOption.objects.filter(id__in=vos_ids, voting=v)
-        for vo in vos:
-            vo.voters.add(voter)
+        vote(voter, vos)
 
     vos = sorted(v.voting_options.all(), key=lambda vo: vo.voters.count(), reverse=True)
     voting_options_sorted = [{'option': vo, 'is_top': vo.voters.count() == vos[0].voters.count()} for vo in vos]
