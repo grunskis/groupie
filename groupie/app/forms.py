@@ -56,7 +56,7 @@ class VotingAddForm(forms.ModelForm):
         cleaned_data.update({'voting_options': vos})
 
         # removing creator from invited
-        emails = [e for e in self.cleaned_data.get('emails', []) if not e == self.cleaned_data['from_email']]
+        emails = [e for e in self.cleaned_data.get('emails', []) if not e == self.cleaned_data.get('from_email')]
         if not emails:
             self._errors["emails"] = ["This field is required"]
         cleaned_data.update({'emails': emails})
