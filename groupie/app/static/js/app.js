@@ -20,12 +20,12 @@ $(function() {
                 previous: $previous.find('[name=voting_options]').val()
             });
 
-        $(html).insertAfter($('#initial_option'));
+        $(html).insertAfter($previous);
         $('#voting_option_' + $datepickers.length).datetimepicker(
             datetimepickerOptions);
 
         $('.remove').click(function () {
-            $(this).parent().parent().remove();
+            $(this).parent().remove();
         });
 
         return false;
