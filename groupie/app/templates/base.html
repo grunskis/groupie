@@ -20,41 +20,19 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-7 title">
-          <a href={% url 'home' %}><h1>Welcome to Groupie!</h1></a>
+          <a href="{% url 'home' %}">
+            <h1>Welcome to Groupie!</h1>
+          </a>
           <h4>Manage groups ideas for events, trips and anything else!</h4>
         </div>
-        <div class="col-lg-5 form-style">
-          {% block main %}{% endblock main %}
-        </div>
+        {% block form %}{% endblock %}
       </div>
     </div>
   </div>
-  <div class="dark">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <h3>How it works</h3>
-          <h4>Enter the emails of your friends, propose a date and see what they think about it!</h4>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container how-it-works">
-    <div class="row">
-      <div class="col-sm-4">
-        <img src="{% static 'img/organize-icon.png' %}">
-        <h4>Organize group events<br> and trips</h4>
-      </div>
-      <div class="col-sm-4">
-         <img src="{% static 'img/comments-icon.png' %}">
-        <h4>Add comments directly<br> from emails</h4>
-      </div>
-      <div class="col-sm-4">
-        <img src="{% static 'img/notifications-icon.png' %}">
-        <h4>Send reminders and summarize emails to all group</h4>
-      </div>
-    </div>
-  </div>
+
+  {% block main %}{% endblock %}
+  
+  {% block footer %}
   <footer>
     <div class="container">
       <div class="row">
@@ -63,12 +41,12 @@
       <div class="row">
       <div class="col-sm-10">© 2013 Groupie manager</div>
       <div class="col-sm-2 text-right"><a href="http://djangodash.com/teams/c4/puccis/">Django Dash 2013</a></div>
-      
       </div>
     </div>
   </footer>
+  {% endblock %}
 
-    {% compressed_js 'bootstrap' %}
-    {% compressed_js 'groupie' %}
+  {% compressed_js 'bootstrap' %}
+  {% compressed_js 'groupie' %}
   </body>
 </html>
