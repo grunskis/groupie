@@ -141,6 +141,7 @@ hr.divisor {
 }
 .italy form .bootstrap-tagsinput {
   width: 100%;
+  font-size: 14px;
 }
 .italy form .icon-th {
   display: none;
