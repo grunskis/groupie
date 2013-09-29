@@ -202,7 +202,8 @@ PIPELINE_JS = {
             'lib/mustache.js',
             'libs/django.mustache.js',
             'js/bootstrap-datetimepicker.js',
-            'js/bootstrap-tagsinput.js'
+            'js/bootstrap-tagsinput.js',
+            'js/pluralize.js'
         ),
         'output_filename': 'js/libs.js'
     },
