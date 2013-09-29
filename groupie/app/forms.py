@@ -3,7 +3,6 @@ import pytz
 from datetime import datetime
 
 from django import forms
-from django.conf import settings
 from django.core.validators import validate_email
 
 from groupie.app.models import Voting, Voter, VotingOption
@@ -42,7 +41,7 @@ class VotingAddForm(forms.ModelForm):
 
     def _parse_datetime(self, dt):
         naive = datetime.strptime(dt, '%d/%m/%Y %H:%M')
-        return pytz.timezone(settings.TIME_ZONE).localize(naive)
+        return pytz.timezone('UTC').localize(naive)
 
     def clean(self, *args, **kwargs):
         cleaned_data = super(VotingAddForm, self).clean(*args, **kwargs)
