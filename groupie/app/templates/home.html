@@ -34,7 +34,7 @@
       {% for value in voting_options %}
       <div id="initial_option" class="row">
         <div class="voting-option input-append date col-xs-8 input" id="voting_option_{{ forloop.counter0 }}" data-date-format="dd/mm/yyyy hh:ii">
-          <input class="form-control input-sm" name="voting_options" size="16" type="text" value="{{ value|date:'m/d/Y H:i' }}" placeholder="30/09/2013 18:00" />
+          <input class="form-control input-sm" name="voting_options" size="16" type="text" value="{{ value|date:'d/m/Y H:i' }}" placeholder="30/09/2013 18:00" />
           <span class="add-on"><i class="icon-th"></i></span>
         </div>
         {% if not forloop.first %}

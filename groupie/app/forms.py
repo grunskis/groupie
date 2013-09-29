@@ -56,10 +56,16 @@ class VotingAddForm(forms.ModelForm):
         # manually cleaning deadline
         d = self.data.get('deadline')
         if d:
-            d = self._parse_datetime(d)
-            if max(d, *vos) == d:
-                self._errors["deadline"] = ["Deadline must be before last option."]
-            cleaned_data.update({'deadline': d.strftime('%Y-%m-%d %H:%M')})
+            try:
+                d = self._parse_datetime(d)
+            except ValueError:
+                # error is already there from clean_deadline
+                pass
+            else:
+                self._errors.pop('deadline')
+                if vos and max(d, *vos) == d:
+                    self._errors["deadline"] = ["Deadline must be before last option."]
+                cleaned_data.update({'deadline': d})
 
         # removing creator from invited
         emails = [e for e in self.cleaned_data.get('emails', []) if not e == self.cleaned_data.get('from_email')]
