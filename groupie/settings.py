@@ -221,4 +221,4 @@ RAVEN_CONFIG = {
 }
 
 # no trailing slash
-BASE_URL = 'http://groupie.herokuapp.com'
+BASE_URL = os.environ.get('BASE_URL', 'http://127.0.0.1')
