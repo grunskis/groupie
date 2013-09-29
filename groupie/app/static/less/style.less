@@ -17,7 +17,7 @@
 body {
 	background: @BackgroundColor;
 }
-p, ul li {
+p, ul li, span {
 	color: @TextColor;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -132,6 +132,13 @@ hr.divisor {
 .thumbnail {
 	h1, h2, h3, h4, h5, h6 {
 		color: @Black;
+	}
+}
+.nr_of_votes {
+	cursor: pointer;
+
+	&:hover {
+		color: darken(@TextColor, 10%);
 	}
 }
 .vote-yes {

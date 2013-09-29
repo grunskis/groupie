@@ -47,7 +47,8 @@ body {
   background: #ecf0f1;
 }
 p,
-ul li {
+ul li,
+span {
   color: #7f8c8d;
 }
 h1,
@@ -152,6 +153,12 @@ hr.divisor {
 .thumbnail h5,
 .thumbnail h6 {
   color: #333333;
+}
+.nr_of_votes {
+  cursor: pointer;
+}
+.nr_of_votes:hover {
+  color: #667273;
 }
 .vote-yes {
   border: 1px solid #27ae60;
