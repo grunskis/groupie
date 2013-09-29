@@ -167,3 +167,6 @@ hr.divisor {
   border: 1px solid #27ae60;
   background: #ddf7e8;
 }
+.btn-send-vote {
+  margin-top: 20px;
+}
