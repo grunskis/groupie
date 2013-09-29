@@ -14,20 +14,20 @@
 	    <div> 
 			Your options are: <br />		     
 			<ul>
-		     	{% with voter.voted_voting_options.all as voted_options %} 
-			     	{% for o in voting.voting_options.all %}
-						<li>
-							<input {% if o in voted_options %}checked{% endif %} type="checkbox" name="voting_options" id="option_{{ o.id }}" value="{{ o.id }}" />
-							"{{ o }}"<br />
-							<span>
-								Voters ({{ o.voters.all|length }}):
-								{% for v in o.voters.all %} 
-									{{ v.email }}
-								{% endfor %}
-							</span>
-						</li>
-			     	{% endfor %}
-			     {% endwith %}
+		     	{% for voo in voting_options_sorted %}
+					<li>
+						<input {% if voo.0 in voter.voted_voting_options.all %}checked{% endif %} type="checkbox" name="voting_options" id="option_{{ voo.0.id }}" value="{{ voo.0.id }}" />
+						{% if voo.1 %}TOP VOTED! {% endif %}
+						"{{ voo.0 }}"
+						<br />
+						<span>
+							Voters ({{ voo.0.voters.all|length }}):
+							{% for v in voo.0.voters.all %} 
+								{{ v.email }}
+							{% endfor %}
+						</span>
+					</li>
+		     	{% endfor %}
 		     </ul>
 		 </div>
 	  	<input type="submit" value="vote" />
