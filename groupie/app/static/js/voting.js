@@ -19,10 +19,10 @@ $(function () {
 
     update_popovers();
 
-    $('.voting-cell').click(function () {
+    $('.voting-option').click(function () {
         var $this = $(this),
             $option = $('input[value=' + $this.data('option') + ']'),
-            $votes = $(this).nextAll('.nr_of_votes'),
+            $votes = $(this).find('.nr_of_votes'),
             nr_of_votes = parseInt($votes.data('nr-of-votes'), 10),
             voters = $votes.data('voters').split(',');
 

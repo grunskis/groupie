@@ -35,7 +35,7 @@
       </div>
       {% for option in voting_options %}
       <div class="col-sm-6 col-md-3">
-        <div class="panel panel-default vote-{{ option.vote }} voting-cell" data-option="{{ option.id }}">
+        <div class="panel panel-default vote-{{ option.vote }} voting-option" data-option="{{ option.id }}">
           <div class="panel-body">
             <h4 class="text-center">{{ option.date|date:'d/m/Y' }}</h4>
             <h2 class="text-center">{{ option.time|date:'H:i' }}</h2>
