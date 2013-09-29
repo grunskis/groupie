@@ -38,13 +38,27 @@ def voting(request, voting_hash):
         vos = VotingOption.objects.filter(id__in=vos_ids, voting=v)
         vote(voter, vos)
 
-    vos = sorted(v.voting_options.all(), key=lambda vo: vo.voters.count(), reverse=True)
-    voting_options_sorted = [{'option': vo, 'is_top': vo.voters.count() == vos[0].voters.count()} for vo in vos]
+    voting_options = []
+    for vo in v.voting_options.order_by('option'):
+        voter_emails = vo.voters.values_list('email', flat=True)
+
+        if vo.voters.filter(email=voter.email).exists():
+            vote = 'yes'
+        else:
+            vote = 'no'
+
+        voting_options.append({
+            'date': vo.option.date,
+            'time': vo.option.time,
+            'voters': ','.join(voter_emails),
+            'nr_of_votes': len(voter_emails),
+            'vote': vote
+        })
 
     ctx = {
         'voting': v,
+        'voting_options': voting_options,
         'voter': voter,
-        'is_creator': voter == v.creator,
-        'voting_options_sorted': voting_options_sorted
+        'is_creator': voter == v.creator
     }
     return render(request, 'voting.html', ctx)
