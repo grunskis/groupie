@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.contrib import messages
@@ -80,3 +80,9 @@ def voting(request, voting_hash):
         'form': form
     }
     return render(request, 'voting.html', ctx)
+
+
+@require_http_methods(["GET"])
+def deadline_hack(request, voting_hash):
+    voting_utils.notify_deadline(Voting.objects.get(url_hash=voting_hash))
+    return HttpResponse()
