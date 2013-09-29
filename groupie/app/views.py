@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
 from groupie.app import utils
-from groupie.app.forms import VotingAddForm
+from groupie.app.forms import VotingAddForm, VotingForm
 from groupie.app.models import Voting, Voter, VotingOption
 from groupie.app.voting import setup_voting
 
@@ -34,11 +34,21 @@ def voting(request, voting_hash):
 
     v = Voting.objects.get(url_hash=voting_hash)
     if request.method == 'POST':
-        vos_ids = [int(vo) for vo in request.POST.getlist('voting_options') if vo]
-        voter.voted_voting_options.clear()
-        vos = VotingOption.objects.filter(id__in=vos_ids, voting=v)
-        for vo in vos:
-            vo.voters.add(voter)
+        form = VotingForm(request.POST, voting=v)
+
+        if form.is_valid():
+            ids = form.cleaned_data['options']
+            voter.voted_voting_options.clear()
+            vos = VotingOption.objects.filter(id__in=ids, voting=v)
+            for vo in vos:
+                vo.voters.add(voter)
+    else:
+        initial_votes = v.voting_options.filter(
+            voters__ref_hash=voter.ref_hash).values_list('id', flat=True)
+
+        form = VotingForm(voting=v, initial={
+            'options': initial_votes
+        })
 
     voting_options = []
     for vo in v.voting_options.order_by('option'):
@@ -50,6 +60,7 @@ def voting(request, voting_hash):
             vote = 'no'
 
         voting_options.append({
+            'id': vo.id,
             'date': vo.option.date,
             'time': vo.option.time,
             'voters': ','.join(voter_emails),
@@ -61,6 +72,7 @@ def voting(request, voting_hash):
         'voting': v,
         'voting_options': voting_options,
         'voter': voter,
-        'is_creator': voter == v.creator
+        'is_creator': voter == v.creator,
+        'form': form
     }
     return render(request, 'voting.html', ctx)

@@ -87,3 +87,20 @@ class VotingAddForm(forms.ModelForm):
             VotingOption.objects.create(voting=v, option=dt)
 
         return v
+
+
+class VotingForm(forms.ModelForm):
+    options = forms.MultipleChoiceField(
+        required=False, widget=forms.CheckboxSelectMultiple)
+
+    class Meta:
+        model = VotingOption
+        fields = ('options',)
+
+    def __init__(self, *args, **kwargs):
+        voting = kwargs.pop('voting')
+
+        super(VotingForm, self).__init__(*args, **kwargs)
+
+        options = voting.voting_options.values_list('id', 'option')
+        self.fields['options'].choices = options
