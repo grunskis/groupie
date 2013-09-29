@@ -68,8 +68,7 @@ def voting(request, voting_hash):
 
         voting_options.append({
             'id': vo.id,
-            'date': vo.option.date,
-            'time': vo.option.time,
+            'datetime': vo.option,
             'voters': ','.join(voter_emails),
             'nr_of_votes': len(voter_emails),
             'vote': vote
