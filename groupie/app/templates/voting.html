@@ -3,35 +3,42 @@
 
 
 {% block main %}
-
-	<form action='{% url 'voting' voting.url_hash %}?ref={{ voter.ref_hash }}' method="post">
-		{% csrf_token %}
-		
-
-		<span>Hello, {{ voter.email }}! </span> <br />
-	    <span>Here it goes: {{ voting.description }} </span> <br />
-
-	    <div> 
-			Your options are: <br />		     
-			<ul>
-		     	{% for voo in voting_options_sorted %}
-					<li>
-						<input {% if voo.option in voter.voted_voting_options.all %}checked{% endif %} type="checkbox" name="voting_options" id="option_{{ voo.option.id }}" value="{{ voo.option.id }}" />
-						{% if voo.is_top %}TOP VOTED! {% endif %}
-						"{{ voo.option }}"
-						<br />
-						<span>
-							Voters ({{ voo.option.voters.all|length }}):
-							{% for v in voo.option.voters.all %} 
-								{{ v.email }}
-							{% endfor %}
-						</span>
-					</li>
-		     	{% endfor %}
-		     </ul>
-		 </div>
-	  	<input type="submit" value="vote" />
-		
-	</form>
-
+	<div class="container">
+		<form action='{% url 'voting' voting.url_hash %}?ref={{ voter.ref_hash }}' method="post">
+			{% csrf_token %}
+			
+			<div class="row">
+				<div class="col-lg-12">
+					<h2>{{ voter.email }}</h2>
+		    			<h4>Invited wants to know what do you think about <em> {{ voting.description }} </em> </h4> 
+		    	</div>
+		    </div>
+				<div class="row">
+					<div class="col-lg-12">
+						Your options are: <br />		     
+					</div>
+			     	{% for voo in voting_options_sorted %}
+						<div class="col-sm-6 col-md-3">
+							<div class="thumbnail">
+							<input {% if voo.option in voter.voted_voting_options.all %}checked{% endif %} type="checkbox" name="voting_options" id="option_{{ voo.option.id }}" value="{{ voo.option.id }}" />
+							{% if voo.is_top %}TOP VOTED! {% endif %}
+							"{{ voo.option }}"
+							<br />
+							<span>
+								Voters ({{ voo.option.voters.all|length }}):
+								{% for v in voo.option.voters.all %} 
+									{{ v.email }}
+								{% endfor %}
+							</span>
+						</div>
+						</div>
+			     	{% endfor %}
+			     </div>
+			<div class="row">
+			 	<div class="col-lg-12">
+		  			<input class="btn btn-default" type="submit" value="vote" />
+				</div>
+			</div>
+		</form>
+	</div>
 {% endblock main %}
