@@ -1,7 +1,9 @@
 $(function() {
     var datetimepickerOptions = {
         autoclose: true,
-        minView: 1
+        minView: 0,
+        minuteStep: 15,
+        startDate: (new Date())
     };
 
     $('#voting_deadline').datetimepicker(datetimepickerOptions);
@@ -10,9 +12,13 @@ $(function() {
     $('#add-datepair').on('click', function() {
         var $datepickers = $('.voting-option'),
             template = Mustache.template('datetimepicker'),
-            html = template.render({nr: $datepickers.length});
+            $previous = $datepickers.last(),
+            html = template.render({
+                nr: $datepickers.length,
+                previous: $previous.find('[name=voting_options]').val()
+            });
 
-        $(html).insertAfter($datepickers.last());
+        $(html).insertAfter($previous);
         $('#voting_option_' + $datepickers.length).datetimepicker(
             datetimepickerOptions);
 
