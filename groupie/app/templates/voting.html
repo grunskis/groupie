@@ -10,28 +10,29 @@
     
     <div class="row">
       <div class="col-lg-12">
-	<h2>{{ voting.creator.email }}</h2>
-	<h4>Invited wants to know what do you think about <em> {{ voting.description }} </em> </h4> 
+      	<h2>{{ voting.creator.email }}</h2>
+      	<h4>Invited wants to know what do you think about <em> {{ voting.description }} </em> </h4> 
       </div>
     </div>
 
     <div class="row">
       <div class="col-lg-12">
-	<p>Your options are:</p>
+      	<p>Your options are:</p>
       </div>
-        {% for option in voting_options %}
-	      <div class="col-sm-6 col-md-3">
-			<div class="thumbnail" data-voters="{{ option.voters }}">
-	          <h4 class="text-center">{{ option.date }}</h4>
-	          <h2 class="text-center">{{ option.time }}</h2>
-	        </div>
-	        <span>{{ option.nr_of_votes }} vote{{ option.nr_of_votes|pluralize }}</span>
-	        
+      {% for option in voting_options %}
+  	    <div class="col-sm-6 col-md-3">
+    			<div class="thumbnail vote-{{ option.vote }}">
+            <h4 class="text-center">{{ option.date }}</h4>
+            <h2 class="text-center">{{ option.time }}</h2>
+  	      </div>
+          <span class="nr_of_votes" data-voters="{{ option.voters }}">
+            {{ option.nr_of_votes }} vote{{ option.nr_of_votes|pluralize }}
+          </span>
 	      </div>
-		{% endfor %}
+		  {% endfor %}
       <div class="row">
         <div class="col-lg-12">
-	  <input class="btn btn-default" type="submit" value="vote" />
+	         <input class="btn btn-default" type="submit" value="vote" />
         </div>
       </div>
   </form>

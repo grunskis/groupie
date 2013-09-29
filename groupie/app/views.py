@@ -44,11 +44,17 @@ def voting(request, voting_hash):
     for vo in v.voting_options.order_by('option'):
         voter_emails = vo.voters.values_list('email', flat=True)
 
+        if vo.voters.filter(email=voter.email).exists():
+            vote = 'yes'
+        else:
+            vote = 'no'
+
         voting_options.append({
             'date': vo.option.date,
             'time': vo.option.time,
             'voters': ','.join(voter_emails),
-            'nr_of_votes': len(voter_emails)
+            'nr_of_votes': len(voter_emails),
+            'vote': vote
         })
 
     ctx = {

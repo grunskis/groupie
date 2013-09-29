@@ -1,5 +1,5 @@
 $(function () {
-    $('.thumbnail').each(function () {
+    $('.nr_of_votes').each(function () {
         var $option = $(this),
             template = Mustache.template('voters'),
             voters = $option.data('voters');
