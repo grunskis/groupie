@@ -219,3 +219,6 @@ PIPELINE_JS = {
 RAVEN_CONFIG = {
     'dsn': os.environ.get('SENTRY_DSN'),
 }
+
+# no trailing slash
+BASE_URL = 'http://groupie.herokuapp.com'
