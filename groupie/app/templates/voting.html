@@ -1,44 +1,40 @@
 {% extends "base.html" %}
-
-
+{% load jstemplate %}
 
 {% block main %}
+{% mustachejs "voters" %}
+
 <div class="container">
   <form action="{% url 'voting' voting.url_hash %}?ref={{ voter.ref_hash }}" method="post">
     {% csrf_token %}
     
     <div class="row">
       <div class="col-lg-12">
-	<h2>{{ voter.email }}</h2>
+	<h2>{{ voting.creator.email }}</h2>
 	<h4>Invited wants to know what do you think about <em> {{ voting.description }} </em> </h4> 
       </div>
     </div>
+
     <div class="row">
       <div class="col-lg-12">
-	Your options are: <br />		     
+	<p>Your options are:</p>
       </div>
-      {% for voo in voting_options_sorted %}
+
       <div class="col-sm-6 col-md-3">
-	<div class="thumbnail">
-	  <input {% if voo.option in voter.voted_voting_options.all %}checked{% endif %} type="checkbox" name="voting_options" id="option_{{ voo.option.id }}" value="{{ voo.option.id }}" />
-	  {% if voo.is_top %}TOP VOTED! {% endif %}
-	  "{{ voo.option }}"
-	  <br />
-	  <span>
-	    Voters ({{ voo.option.voters.all|length }}):
-	    {% for v in voo.option.voters.all %} 
-	    {{ v.email }}
-	    {% endfor %}
-	  </span>
-	</div>
+        {% for option in voting_options %}
+	<div class="thumbnail" data-voters="{{ option.voters }}">
+          <h4>{{ option.date }}</h4>
+          <h2>{{ option.time }}</h2>
+        </div>
+        <span>{{ option.nr_of_votes }} vote{{ option.nr_of_votes|pluralize }}</span>
+        {% endfor %}
       </div>
-      {% endfor %}
-    </div>
-    <div class="row">
-      <div class="col-lg-12">
-	<input class="btn btn-default" type="submit" value="vote" />
+
+      <div class="row">
+        <div class="col-lg-12">
+	  <input class="btn btn-default" type="submit" value="vote" />
+        </div>
       </div>
-    </div>
   </form>
-</div>
-{% endblock main %}
+  </div>
+  {% endblock main %}

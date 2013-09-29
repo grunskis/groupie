@@ -209,6 +209,7 @@ PIPELINE_JS = {
     'groupie': {
         'source_filenames': (
             'js/app.js',
+            'js/voting.js',
         ),
         'output_filename': 'js/groupie.js'
     }
