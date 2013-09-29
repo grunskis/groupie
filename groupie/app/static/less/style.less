@@ -79,6 +79,7 @@ hr.divisor {
 			a  {
 				h1 {
 					color: @SecondTitlesColor;
+					transition: all 0.2s ease-in-out 0.1s;
 
 					&:hover {
 		    			color: darken(@SecondTitlesColor, 10%);
@@ -130,17 +131,21 @@ hr.divisor {
 
 /* Voting design */
 .panel-body {
-	h1, h2, h3, h4, h5, h6 {
-		color: @Black;
-	}
+	cursor: pointer;
+	transition: all 0.2s ease-in-out 0.1s;
+
+
 	&:hover {
 		background: lighten(@Green, 53%);
 	}
 
-	cursor: pointer;
+	h1, h2, h3, h4, h5, h6 {
+		color: @Black;
+	}
 }
 .nr_of_votes {
 	cursor: pointer;
+	transition: all 0.2s ease-in-out 0.1s;
 
 	&:hover {
 		color: darken(@TextColor, 10%);

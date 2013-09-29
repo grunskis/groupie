@@ -113,6 +113,7 @@ hr.divisor {
 }
 .italy.jumbotron .title a h1 {
   color: #ecf0f1;
+  transition: all 0.2s ease-in-out 0.1s;
 }
 .italy.jumbotron .title a h1:hover {
   color: #cfd9db;
@@ -148,6 +149,10 @@ hr.divisor {
 /* Voting design */
 .panel-body {
   cursor: pointer;
+  transition: all 0.2s ease-in-out 0.1s;
+}
+.panel-body:hover {
+  background: #e9faf0;
 }
 .panel-body h1,
 .panel-body h2,
@@ -157,11 +162,9 @@ hr.divisor {
 .panel-body h6 {
   color: #333333;
 }
-.panel-body:hover {
-  background: #e9faf0;
-}
 .nr_of_votes {
   cursor: pointer;
+  transition: all 0.2s ease-in-out 0.1s;
 }
 .nr_of_votes:hover {
   color: #667273;
