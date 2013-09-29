@@ -163,6 +163,9 @@ PIPELINE_CSS = {
     'bootstrap': {
         'source_filenames': (
             'lib/bootstrap/css/bootstrap.min.css',
+            'lib/bootstrap/css/datetimepicker.css',
+            'lib/bootstrap/css/Sprites.min.css',
+            'lib/bootstrap/css/bootstrap-tagsinput.css'
         ),
         'output_filename': 'css/bootstrap.css',
         'extra_context': {
@@ -171,9 +174,7 @@ PIPELINE_CSS = {
     },
     'groupie': {
         'source_filenames': (
-            'css/datetimepicker.css',
-            'css/bootstrap-tagsinput.css',
-            'css/style.css'
+            'css/style.css',
         ),
         'output_filename': 'css/groupie.css',
         'extra_context': {
