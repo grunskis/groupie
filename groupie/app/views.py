@@ -50,7 +50,9 @@ def voting(request, voting_hash):
 
     voting_options = []
     for vo in v.voting_options.order_by('option'):
-        voter_emails = vo.voters.values_list('email', flat=True)
+        voter_emails = list(vo.voters.values_list('email', flat=True))
+        if voter.email in voter_emails:
+            voter_emails[voter_emails.index(voter.email)] = 'You'
 
         if vo.voters.filter(email=voter.email).exists():
             vote = 'yes'
