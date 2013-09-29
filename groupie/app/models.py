@@ -37,7 +37,7 @@ class Voting(models.Model):
     @property
     def description_short(self, length=50):
         short = self.description[:50]
-        return "{}...".format(short)
+        return u"{}...".format(short)
 
 
 ## VOTING OPTION ##

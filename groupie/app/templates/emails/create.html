@@ -1,7 +1,7 @@
 {{ voting.description }}
 
 {% for vo in voting.voting_options.all %}
-	{{ forloop.counter }}. {{ vo.text }}
+	{{ forloop.counter }}. {{ vo.option }}
 {% endfor %}
 
 
