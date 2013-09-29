@@ -62,7 +62,8 @@ class VotingAddForm(forms.ModelForm):
                 # error is already there from clean_deadline
                 pass
             else:
-                self._errors.pop('deadline')
+                if 'deadline' in self._errors:
+                    self._errors.pop('deadline')
                 if vos and max(d, *vos) == d:
                     self._errors["deadline"] = ["Deadline must be before last option."]
                 cleaned_data.update({'deadline': d})
