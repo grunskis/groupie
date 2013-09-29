@@ -59,7 +59,7 @@
     <div class="row">
       <div class="col-md-3 btn-send-vote">
         {% if is_creator %}
-        <input class="btn btn-primary btn-lg btn-block" type="submit" value="Change your vote" />
+        <input id="change-vote" class="btn btn-primary btn-lg btn-block" disabled="disabled" type="submit" value="Change your vote" />
         {% else %}
         <input class="btn btn-primary btn-lg btn-block" type="submit" value="Submit your vote" />
         <p class="text-danger"><small>* If you cannot make it then submit an empty form</small></p>

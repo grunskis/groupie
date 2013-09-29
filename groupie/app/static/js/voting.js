@@ -42,6 +42,8 @@ $(function () {
         $votes.data('nr-of-votes', nr_of_votes);
         $votes.data('voters', voters.join(','));
 
+        $('#change-vote').attr('disabled', null);
+
         update_popovers();
     });
 });
