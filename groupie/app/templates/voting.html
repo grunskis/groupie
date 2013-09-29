@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load jstemplate %}
 
+{% block body_classes %}voting{% endblock %}
+
 {% block main %}
 {% mustachejs "voters" %}
 
@@ -50,7 +52,7 @@
       {% endfor %}
     </div>
     <div class="row">
-      <div class="col-md-3 col-md-offset-9 btn-send-vote">
+      <div class="col-md-3 btn-send-vote">
         <input class="btn btn-primary btn-lg btn-block" type="submit" value="Submit your vote" />
         <p class="text-danger"><small>* If you cannot make it then submit an empty form</small></p>
       </div>
