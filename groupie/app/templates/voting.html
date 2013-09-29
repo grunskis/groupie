@@ -22,11 +22,13 @@
 
       <div class="col-sm-6 col-md-3">
         {% for option in voting_options %}
-	<div class="thumbnail" data-voters="{{ option.voters }}">
+	<div class="thumbnail">
           <h4>{{ option.date }}</h4>
           <h2>{{ option.time }}</h2>
         </div>
-        <span>{{ option.nr_of_votes }} vote{{ option.nr_of_votes|pluralize }}</span>
+        <span class="nr_of_votes" data-voters="{{ option.voters }}">
+          {{ option.nr_of_votes }} vote{{ option.nr_of_votes|pluralize }}
+        </span>
         {% endfor %}
       </div>
 
