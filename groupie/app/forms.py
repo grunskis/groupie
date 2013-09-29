@@ -42,6 +42,10 @@ class VotingAddForm(forms.ModelForm):
         model = Voting
         exclude = ('deadline', 'voting_options')
 
+    def _parse_datetime(self, dt):
+        naive = datetime.strptime(dt, '%d/%m/%Y %H:%M')
+        return pytz.timezone(settings.TIME_ZONE).localize(naive)
+
     def clean(self, *args, **kwargs):
         # TODO: rebuild the whole form either to have it build fully from backend or frontend
         cleaned_data = super(VotingAddForm, self).clean(*args, **kwargs)
@@ -49,7 +53,7 @@ class VotingAddForm(forms.ModelForm):
         # manually cleaning deadline
         d = self.data.get('deadline')
         if d:
-            d = datetime.strptime(d, '%d/%m/%Y %H:%M').strftime('%Y-%m-%d %H:%M')
+            d = self._parse_datetime(d).strftime('%Y-%m-%d %H:%M')
             cleaned_data.update({'deadline': d})
 
         # manually cleaning voting options
@@ -72,15 +76,15 @@ class VotingAddForm(forms.ModelForm):
         voting_options = self.cleaned_data.pop('voting_options')
 
         v = Voting.objects.create(**self.cleaned_data)
+
         for e in emails:
             Voter.objects.create(voting=v, email=e)
 
-        for option in voting_options:
-            dt = self._parse_datetime(option)
+        # voting creator is also added as a voter
+        Voter.objects.create(voting=v, email=v.from_email)
+
+        for vo in voting_options:
+            dt = self._parse_datetime(vo)
             VotingOption.objects.create(voting=v, option=dt)
 
         return v
-
-    def _parse_datetime(self, dt):
-        naive = datetime.strptime(dt, '%d/%m/%Y %H:%M')
-        return pytz.timezone(settings.TIME_ZONE).localize(naive)

@@ -1,22 +1,25 @@
 # -*- coding: utf-8 -*-
 from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
-from groupie.app.models import Voter
+from groupie.app import utils
 
 
 def setup_voting(voting):
-    # voting creator is added and automatically votes for all proposed options
-    v = Voter.objects.create(email=voting.from_email, voting=voting)
+    # creator automatically votes for all proposed options
     for vo in voting.voting_options.all():
-        vo.voters.add(v)
+        vo.voters.add(voting.creator)
 
     # notification emails sendings
-    subject = "new groupie"
+    subject = "[groupie] {}".format(voting.description_short)
     from_email = voting.from_email
-    url = "http://localhost:8000/{}".format(voting.url_hash)
 
     for vr in voting.voters.all():
-        body = url + "?ref={}".format(vr.ref_hash)
+        body = render_to_string('emails/create.html', {
+            'voting': voting,
+            'voting_url': utils.get_abs_url(voting, vr.ref_hash)
+        })
+
         send_mail(subject, body, from_email, [vr.email])
 
     # deadline reminders scheduling
