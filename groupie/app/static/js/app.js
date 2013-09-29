@@ -7,7 +7,9 @@ $(function() {
     };
 
     $('#voting_deadline').datetimepicker(datetimepickerOptions);
-    $('#voting_option_0').datetimepicker(datetimepickerOptions);
+    $('#voting_option_0').datetimepicker(datetimepickerOptions).on('changeDate', function() {
+        $('#add-datepair').attr('disabled', null);
+    });
 
     $('#add-datepair').on('click', function() {
         var $datepickers = $('.voting-option'),
