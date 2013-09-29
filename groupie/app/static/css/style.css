@@ -51,6 +51,10 @@ ul li,
 span {
   color: #7f8c8d;
 }
+span [data-role="remove"],
+span .glyphicon {
+  color: #333333;
+}
 h1,
 h2,
 h3,
@@ -93,6 +97,9 @@ hr.divisor {
 .italy {
   background: url(../img/group-travel02.jpg) left bottom;
   width: 100%;
+}
+.italy .help-block {
+  font-size: 14px;
 }
 .italy.jumbotron {
   padding-top: 28px;
@@ -142,6 +149,7 @@ hr.divisor {
 .italy form .bootstrap-tagsinput {
   width: 100%;
   font-size: 14px;
+  margin-bottom: 0px;
 }
 .italy form .icon-th {
   display: none;
