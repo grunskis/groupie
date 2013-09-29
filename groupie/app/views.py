@@ -3,10 +3,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
-from groupie.app import utils
+from groupie.app import utils, voting_utils
 from groupie.app.forms import VotingAddForm, VotingForm
 from groupie.app.models import Voting, Voter, VotingOption
-from groupie.app.voting import setup_voting, vote
 
 
 @require_http_methods(["GET", "POST"])
@@ -15,7 +14,7 @@ def home(request):
         form = VotingAddForm(request.POST)
         if form.is_valid():
             voting = form.save()
-            setup_voting(voting)
+            voting_utils.setup_voting(voting)
             redirect_url = utils.get_abs_url(voting, voting.creator.ref_hash)
             return HttpResponseRedirect(redirect_url)
 
@@ -40,8 +39,7 @@ def voting(request, voting_hash):
             ids = form.cleaned_data['options']
             voter.voted_voting_options.clear()
             vos = VotingOption.objects.filter(id__in=ids, voting=v)
-            for vo in vos:
-                vo.voters.add(voter)
+            voting_utils.vote(voter, vos)
     else:
         initial_votes = v.voting_options.filter(
             voters__ref_hash=voter.ref_hash).values_list('id', flat=True)
