@@ -146,15 +146,15 @@ hr.divisor {
   display: none;
 }
 /* Voting design */
-.thumbnail {
+.voting-cell {
   cursor: pointer;
 }
-.thumbnail h1,
-.thumbnail h2,
-.thumbnail h3,
-.thumbnail h4,
-.thumbnail h5,
-.thumbnail h6 {
+.voting-cell h1,
+.voting-cell h2,
+.voting-cell h3,
+.voting-cell h4,
+.voting-cell h5,
+.voting-cell h6 {
   color: #333333;
 }
 .nr_of_votes {

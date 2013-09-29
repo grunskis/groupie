@@ -28,20 +28,24 @@
       </div>
       {% for option in voting_options %}
       <div class="col-sm-6 col-md-3">
-    	<div class="thumbnail vote-{{ option.vote }}" data-option="{{ option.id }}">
-          <h4 class="text-center">{{ option.date|date:'d/m/Y' }}</h4>
-          <h2 class="text-center">{{ option.time|date:'H:i' }}</h2>
-  	</div>
-        <span class="nr_of_votes" data-voters="{{ option.voters }}" data-nr-of-votes="{{ option.nr_of_votes }}">
-          {{ option.nr_of_votes }} vote{{ option.nr_of_votes|pluralize }}
-        </span>
-      </div>
+        <div class="panel panel-default vote-{{ option.vote }} voting-cell" data-option="{{ option.id }}">
+          <div class="panel-body">
+            <h4 class="text-center">{{ option.date|date:'d/m/Y' }}</h4>
+            <h2 class="text-center">{{ option.time|date:'H:i' }}</h2>
+          </div>
+          <div class="panel-footer">
+            <span class="nr_of_votes" data-voters="{{ option.voters }}" data-nr-of-votes="{{ option.nr_of_votes }}">
+              {{ option.nr_of_votes }} vote{{ option.nr_of_votes|pluralize }}
+            </span>
+          </div>
+        </div>
+        </div>
       {% endfor %}
     </div>
     <div class="row">
-      <div class="col-lg-12 btn-send-vote">
-        <input class="btn btn-primary" type="submit" value="save" />
-        <p>If you cannot make it then submit an empty form</p>
+      <div class="col-md-3 col-md-offset-9 btn-send-vote">
+        <input class="btn btn-primary btn-lg btn-block" type="submit" value="Submit your vote" />
+        <p class="text-danger"><small>* If you cannot make it then submit an empty form</small></p>
       </div>
     </div>
     <div class="row" style="display: none">
