@@ -146,3 +146,18 @@ hr.divisor {
 .italy form .icon-th {
   display: none;
 }
+/* Voting design */
+.thumbnail h1,
+.thumbnail h2,
+.thumbnail h3,
+.thumbnail h4,
+.thumbnail h5,
+.thumbnail h6 {
+  color: #333333;
+}
+.vote-yes {
+  border: 1px solid #27ae60;
+}
+/*.vote-no {
+	border: 1px solid @TitlesColor;
+}*/
