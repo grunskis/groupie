@@ -40,10 +40,10 @@ class Voting(models.Model):
 class VotingOption(models.Model):
     voting = models.ForeignKey(Voting, related_name='voting_options')
 
-    text = models.CharField(max_length=255)
+    option = models.DateTimeField()
 
     def __unicode__(self):
-        return u'{}'.format(self.text)
+        return unicode(self.option)
 
 
 ## VOTER ##
