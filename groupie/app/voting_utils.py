@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from django.utils import timezone
 
 from groupie.app import utils
 
@@ -9,38 +10,59 @@ def setup_voting(voting):
     # creator automatically votes for all proposed options
     vote(voting.creator, voting.voting_options.all())
 
-    # send creation notifications
-    notify_all(voting, voting.voters.all(), "[groupie-hello-kitty]", "create")
+    notify_create(voting)
 
-    # deadline reminders scheduling
     if voting.deadline:
-        # TODO: schedule sending of deadline reminder; we need to remember to cancel it if voting changes
-        pass
+        notify_deadline(voting)
 
 
 def vote(voter, voting_options):
+    # clear previous votes and cast new ones
     voter.voted_voting_options.clear()
     for vo in voting_options:
         vo.voters.add(voter)
 
-    # TODO: make those notifications be sent only once
-    # send notifications if progress thresholds reached
     voters_all = voter.voting.voters.all()
-    voters_not_voted = voter.voting.voters.filter(voted_voting_options__isnull=True)
-    if voters_not_voted.count() == 0:
-        # TODO: show only top voted
-        notify_all(voter.voting, voter.voting.voters.all(), "[groupie-its-decided!]", 'all_voted')
-    elif (voters_all.count() / 2.0) >= voters_not_voted.count():
-        notify_all(voter.voting, voters_not_voted, "[groupie-getting-there...]", 'half_voted')
+    voters_not_voted = voters_all.filter(voted_voting_options__isnull=True).count()
+
+    # send notifications if progress thresholds reached for the first time
+    if not voter.voting.notify_all_voted_at and voters_not_voted == 0:
+        notify_all_voted(voter.voting)
+    elif voters_all.count() > 3 and not voter.voting.notify_half_voted_at and (voters_all.count() / 2.0) >= voters_not_voted:
+        notify_half_voted(voter.voting)
 
 
-def notify_all(voting, voters, subject_tag, template_name):
+## NOTIFICATIONS ##
+
+def notify_create(voting):
+    notify(voting, voting.voters.all(), "[groupie-hello-kitty]", "emails/created.html")
+    voting.notify_created_at = timezone.now()
+    voting.save()
+
+
+def notify_deadline(voting):
+    pass
+
+
+def notify_half_voted(voting):
+    voters = voting.voters.filter(voted_voting_options__isnull=True)
+    notify(voting, voters, "[groupie-getting-there...]", 'emails/half_voted.html')
+    voting.notify_half_voted_at = timezone.now()
+    voting.save()
+
+
+def notify_all_voted(voting):
+    notify(voting, voting.voters.all(), "[groupie-its-decided!]", 'emails/all_voted.html')
+    voting.notify_all_voted_at = timezone.now()
+    voting.save()
+
+
+def notify(voting, voters, subject_tag, template):
     subject = "{} {}".format(subject_tag, voting.description_short)
-    from_email = voting.from_email
 
     for vr in voters:
-        body = render_to_string("emails/{}.html".format(template_name), {
+        body = render_to_string(template, {
             'voting': voting,
             'voting_url': utils.get_abs_url(voting, vr.ref_hash)
         })
-        send_mail(subject, body, from_email, [vr.email])
+        send_mail(subject, body, voting.from_email, [vr.email])

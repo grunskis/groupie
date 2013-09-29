@@ -21,6 +21,11 @@ class Voting(models.Model):
     description = models.TextField()
     deadline = models.DateTimeField(blank=True, null=True)
 
+    notify_create_at = models.DateTimeField(blank=True, null=True)
+    notify_deadline_at = models.DateTimeField(blank=True, null=True)
+    notify_half_voted_at = models.DateTimeField(blank=True, null=True)
+    notify_all_voted_at = models.DateTimeField(blank=True, null=True)
+
     def __unicode__(self):
         """
         Returns a snapshot of current scores.

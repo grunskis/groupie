@@ -2,6 +2,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
+from django.contrib import messages
 
 from groupie.app import utils, voting_utils
 from groupie.app.forms import VotingAddForm, VotingForm
@@ -40,6 +41,9 @@ def voting(request, voting_hash):
             voter.voted_voting_options.clear()
             vos = VotingOption.objects.filter(id__in=ids, voting=v)
             voting_utils.vote(voter, vos)
+
+            messages.success(request, 'Your vote has been submitted! '
+                             'Hang tight while others do the same...')
     else:
         initial_votes = v.voting_options.filter(
             voters__ref_hash=voter.ref_hash).values_list('id', flat=True)
