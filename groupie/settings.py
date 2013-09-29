@@ -150,7 +150,7 @@ MAILGUN_ACCESS_KEY = os.environ['MAILGUN_API_KEY']
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
-PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.slimit.SlimItCompressor'
+PIPELINE_JS_COMPRESSOR = None
 PIPELINE_CSS_COMPRESSOR = None
 
 #PIPELINE_ENABLED = True
