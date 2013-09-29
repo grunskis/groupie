@@ -3,35 +3,36 @@
 
 
 {% block main %}
+	<div class="container">
+		<form action='{% url 'voting' voting.url_hash %}?ref={{ voter.ref_hash }}' method="post">
+			{% csrf_token %}
+			
 
-	<form action='{% url 'voting' voting.url_hash %}?ref={{ voter.ref_hash }}' method="post">
-		{% csrf_token %}
-		
+			<span>Hello, {{ voter.email }}! </span> <br />
+		    <span>Here it goes: {{ voting.description }} </span> <br />
 
-		<span>Hello, {{ voter.email }}! </span> <br />
-	    <span>Here it goes: {{ voting.description }} </span> <br />
-
-	    <div> 
-			Your options are: <br />		     
-			<ul>
-		     	{% for voo in voting_options_sorted %}
-					<li>
-						<input {% if voo.0 in voter.voted_voting_options.all %}checked{% endif %} type="checkbox" name="voting_options" id="option_{{ voo.0.id }}" value="{{ voo.0.id }}" />
-						{% if voo.1 %}TOP VOTED! {% endif %}
-						"{{ voo.0 }}"
-						<br />
-						<span>
-							Voters ({{ voo.0.voters.all|length }}):
-							{% for v in voo.0.voters.all %} 
-								{{ v.email }}
-							{% endfor %}
-						</span>
-					</li>
-		     	{% endfor %}
-		     </ul>
-		 </div>
-	  	<input type="submit" value="vote" />
-		
-	</form>
+		    <div> 
+				Your options are: <br />		     
+				<ul>
+			     	{% for voo in voting_options_sorted %}
+						<li>
+							<input {% if voo.0 in voter.voted_voting_options.all %}checked{% endif %} type="checkbox" name="voting_options" id="option_{{ voo.0.id }}" value="{{ voo.0.id }}" />
+							{% if voo.1 %}TOP VOTED! {% endif %}
+							"{{ voo.0 }}"
+							<br />
+							<span>
+								Voters ({{ voo.0.voters.all|length }}):
+								{% for v in voo.0.voters.all %} 
+									{{ v.email }}
+								{% endfor %}
+							</span>
+						</li>
+			     	{% endfor %}
+			     </ul>
+			 </div>
+		  	<input type="submit" value="vote" />
+			
+		</form>
+	</div>
 
 {% endblock main %}
