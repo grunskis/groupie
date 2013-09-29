@@ -18,7 +18,7 @@ $(function() {
                 previous: $previous.find('[name=voting_options]').val()
             });
 
-        $(html).insertAfter($previous);
+        $(html).insertAfter($('#initial_option'));
         $('#voting_option_' + $datepickers.length).datetimepicker(
             datetimepickerOptions);
 
