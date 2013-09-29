@@ -34,6 +34,11 @@ class Voting(models.Model):
     def creator(self):
         return self.voters.get(email=self.from_email)
 
+    @property
+    def description_short(self, length=50):
+        short = self.description[:50]
+        return "{}...".format(short)
+
 
 ## VOTING OPTION ##
 

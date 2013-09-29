@@ -69,8 +69,12 @@ class VotingAddForm(forms.ModelForm):
         voting_options = self.cleaned_data.pop('voting_options')
 
         v = Voting.objects.create(**self.cleaned_data)
+
         for e in emails:
             Voter.objects.create(voting=v, email=e)
+        # voting creator is also added as a voter
+        Voter.objects.create(voting=v, email=v.from_email)
+
         for vo in voting_options:
             VotingOption.objects.create(voting=v, text=vo)
 
