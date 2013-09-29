@@ -136,8 +136,6 @@ hr.divisor {
 }
 .italy form .btn-block {
   margin-top: 20px;
-  /*clear: both;*/
-
 }
 .italy form .bootstrap-tagsinput {
   width: 100%;
@@ -158,6 +156,3 @@ hr.divisor {
 .vote-yes {
   border: 1px solid #27ae60;
 }
-/*.vote-no {
-	border: 1px solid @TitlesColor;
-}*/
