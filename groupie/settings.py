@@ -163,6 +163,7 @@ PIPELINE_CSS = {
     'bootstrap': {
         'source_filenames': (
             'lib/bootstrap/css/bootstrap.min.css',
+            'lib/bootstrap/css/bootstrap-responsive.min.css',
         ),
         'output_filename': 'css/bootstrap.css',
         'extra_context': {

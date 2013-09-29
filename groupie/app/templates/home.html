@@ -8,62 +8,60 @@
 
 <form role="form" action="{% url 'home' %}" method="post">
 	{% csrf_token %}
-  <div class="form-group col-md-12 {% if form.from_email.errors %}has-error{% endif %}">
+  <div class="form-group span12 {% if form.from_email.errors %}has-error{% endif %}">
     <label class="control-label" for="id_from_email">Your email</label>
     <div>
-      <input class="form-control input-sm" id="id_from_email" maxlength="255"
+      <input class="form-control span4" id="id_from_email" maxlength="255"
              name="from_email" type="email" placeholder="you@yourserver.com" />
       {% if form.from_email.errors %}
       <span class="alert alert-danger">{{ form.from_email.errors.0 }}</span>
       {% endif %}
     </div>
   </div>
-  <div class="form-group col-md-12 {% if form.description.errors %}has-error{% endif %}">
+  <div class="form-group span12 {% if form.description.errors %}has-error{% endif %}">
     <label class="control-label" for="id_description">What is your proposal?</label>
     <div class="">
-      <textarea class="form-control input-sm" cols="40" id="id_description" name="description" rows="4" placeholder="Describe your planned activity here..."></textarea>
+      <textarea class="form-control span4" cols="40" id="id_description" name="description" rows="4" placeholder="Describe your planned activity here..."></textarea>
       {% if form.description.errors %}
       <span class="alert alert-danger">{{ form.description.errors.0 }}</span>
       {% endif %}
     </div>
   </div>
-  <div class="form-group col-md-12 {% if form.emails.errors %}has-error{% endif %}">
+  <div class="form-group span12 {% if form.emails.errors %}has-error{% endif %}">
     <label class="control-label " for="id_emails">Friend emails</label>
     <div class="">
-      <input class="form-control input-sm" id="id_emails" name="emails" type="text" placeholder="List here emails of your buddies" />
+      <input class="form-control span4" id="id_emails" name="emails" type="text" placeholder="List here emails of your buddies" />
       {% if form.emails.errors %}
       <span class="alert alert-danger">{{ form.emails.errors.0 }}</span>
       {% endif %}
     </div>
   </div>
-  <div class="checkbox">
-    <label>
+    <label class="checkbox">
       <input checked="checked" id="id_send_to_all" name="send_to_all" type="checkbox" />
       Let everybody know who's invited
     </label>
-  </div>
 
-  <div class="form-group col-md-12">
+  <div class="form-group span12">
     <label class="control-label" for="voting_deadline">Voting deadline</label>
     <div class="input-append date" id="voting_deadline" data-date-format="dd/mm/yyyy hh:ii">
-      <input class="form-control input-sm" size="16" name="deadline" type="text" value="" placeholder="26/08/2013 01:40" />
+      <input class="form-control span4" size="16" name="deadline" type="text" value="" placeholder="26/08/2013 01:40" />
       <span class="add-on"><i class="icon-th"></i></span>
     </div>
   </div>
 
   <div class="form-group {% if form.voting_options.errors %}has-error{% endif %}">
-    <label class="control-label col-md-12" for="voting_option_0">When do you want to do it?</label>
+    <label class="control-label span12" for="voting_option_0">When do you want to do it?</label>
     <div class="voting-option input-append date col-xs-8" id="voting_option_0" data-date-format="dd/mm/yyyy hh:ii">
-      <input class="form-control input-sm" name="voting_options" size="16" type="text" />
+      <input class="form-control span4" name="voting_options" size="16" type="text" />
       <span class="add-on"><i class="icon-th"></i></span>
     </div>
     {% if form.voting_options.errors %}
     <span class="alert alert-danger">{{ form.voting_options.errors.0 }}</span>
     {% endif %}
-    <a class="btn btn-default btn-sm col-xs-3" id="add-datepair">Add Dates</a>
+    <a class="btn btn-default btn-sm span3" id="add-datepair">Add Dates</a>
   </div>
-  <div class="form-group">
-    <input class="btn btn-primary btn-lg btn-block" type="submit" name="create" value="create" />
+  <div class="form-group span12">
+    <input class="btn btn-primary btn-lg span4" type="submit" name="create" value="create" />
   </div>
 </form>
 {% endblock main %}
