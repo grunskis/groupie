@@ -21,9 +21,6 @@ class Voting(models.Model):
     description = models.TextField()
     deadline = models.DateTimeField(blank=True, null=True)
 
-    # start an email discussion
-    send_to_all = models.BooleanField()
-
     def __unicode__(self):
         """
         Returns a snapshot of current scores.
