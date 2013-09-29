@@ -14,6 +14,3 @@ settings_local.py
 
 # Mac
 .DS_Store
-
-# Heroku
-iron.json
