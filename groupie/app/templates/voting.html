@@ -22,13 +22,13 @@
         {% if is_creator %}
         <h3>You asked your friends what's their preference when to do <em>{{ voting.description }}</em></h3>
         {% if voting.deadline %}
-        <p>Voting deadline is <strong>{{ voting.deadline|date:'m/d/Y H:i' }} </strong></p>
+        <p>Voting deadline is <strong>{{ voting.deadline|date:'d/m/Y H:i' }} </strong></p>
         {% endif %}
         {% else %}
       	<h2>{{ voting.creator.email }}</h2>
       	<h4>Wants to know what do you think about <em>{{ voting.description }}</em></h4>
         {% if voting.deadline %}
-        <p>Please fill out this form until <strong>{{ voting.deadline|date:'m/d/Y H:i' }}</strong>, after that voting will be closed...</p>
+        <p>Please fill out this form until <strong>{{ voting.deadline|date:'d/m/Y H:i' }}</strong>, after that voting will be closed...</p>
         {% endif %}
         {% endif %}
       </div>
