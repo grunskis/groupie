@@ -16,13 +16,13 @@
 			<ul>
 		     	{% for voo in voting_options_sorted %}
 					<li>
-						<input {% if voo.0 in voter.voted_voting_options.all %}checked{% endif %} type="checkbox" name="voting_options" id="option_{{ voo.0.id }}" value="{{ voo.0.id }}" />
-						{% if voo.1 %}TOP VOTED! {% endif %}
-						"{{ voo.0 }}"
+						<input {% if voo.option in voter.voted_voting_options.all %}checked{% endif %} type="checkbox" name="voting_options" id="option_{{ voo.option.id }}" value="{{ voo.option.id }}" />
+						{% if voo.is_top %}TOP VOTED! {% endif %}
+						"{{ voo.option }}"
 						<br />
 						<span>
-							Voters ({{ voo.0.voters.all|length }}):
-							{% for v in voo.0.voters.all %} 
+							Voters ({{ voo.option.voters.all|length }}):
+							{% for v in voo.option.voters.all %} 
 								{{ v.email }}
 							{% endfor %}
 						</span>
