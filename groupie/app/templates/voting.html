@@ -21,20 +21,25 @@
       <div class="col-lg-12">
         {% if is_creator %}
         <h3>You asked your friends what's their preference when to do <em>{{ voting.description }}</em></h3>
+        {% if voting.deadline %}
+        <p>Voting deadline is <strong>{{ voting.deadline|date:'m/d/Y H:i' }} </strong></p>
+        {% endif %}
         {% else %}
       	<h2>{{ voting.creator.email }}</h2>
       	<h4>Wants to know what do you think about <em>{{ voting.description }}</em></h4>
-        {% endif %}
         {% if voting.deadline %}
-        <p>Please fill out this form until <strong>{{ voting.deadline }} </strong>, after that voting will be closed...</p>
+        <p>Please fill out this form until <strong>{{ voting.deadline|date:'m/d/Y H:i' }}</strong>, after that voting will be closed...</p>
+        {% endif %}
         {% endif %}
       </div>
     </div>
 
     <div class="row">
+      {% if not is_creator %}
       <div class="col-lg-12">
-      	<p>Click on all the options when you are available</p>
+      	<p>Click on all the time options when you are available:</p>
       </div>
+      {% endif %}
       {% for option in voting_options %}
       <div class="col-sm-6 col-md-3">
         <div class="panel panel-default vote-{{ option.vote }} voting-option" data-option="{{ option.id }}">
@@ -53,8 +58,12 @@
     </div>
     <div class="row">
       <div class="col-md-3 btn-send-vote">
+        {% if is_creator %}
+        <input class="btn btn-primary btn-lg btn-block" type="submit" value="Change your vote" />
+        {% else %}
         <input class="btn btn-primary btn-lg btn-block" type="submit" value="Submit your vote" />
         <p class="text-danger"><small>* If you cannot make it then submit an empty form</small></p>
+        {% endif %}
       </div>
     </div>
     <div class="row" style="display: none">
