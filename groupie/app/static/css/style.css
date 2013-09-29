@@ -136,8 +136,12 @@ hr.divisor {
 }
 .italy form .btn-block {
   margin-top: 20px;
-  clear: both;
+  /*clear: both;*/
+
 }
 .italy form .bootstrap-tagsinput {
   width: 100%;
+}
+.italy form .icon-th {
+  display: none;
 }
