@@ -129,6 +129,9 @@ hr.divisor {
   text-decoration: none;
   cursor: pointer;
 }
+.italy form textarea {
+  resize: none;
+}
 .italy form label {
   font-size: 18px;
   margin: 0;
