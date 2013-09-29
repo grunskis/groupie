@@ -22,7 +22,7 @@
 
       <div class="col-sm-6 col-md-3">
         {% for option in voting_options %}
-	<div class="thumbnail">
+	<div class="thumbnail vote-{{ option.vote }}">
           <h4>{{ option.date }}</h4>
           <h2>{{ option.time }}</h2>
         </div>
