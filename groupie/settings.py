@@ -30,11 +30,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
 )
 
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Europe/Berlin'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -163,6 +159,9 @@ PIPELINE_CSS = {
     'bootstrap': {
         'source_filenames': (
             'lib/bootstrap/css/bootstrap.min.css',
+            'lib/bootstrap/css/datetimepicker.css',
+            'lib/bootstrap/css/Sprites.min.css',
+            'lib/bootstrap/css/bootstrap-tagsinput.css'
         ),
         'output_filename': 'css/bootstrap.css',
         'extra_context': {
@@ -171,9 +170,7 @@ PIPELINE_CSS = {
     },
     'groupie': {
         'source_filenames': (
-            'css/datetimepicker.css',
-            'css/bootstrap-tagsinput.css',
-            'css/style.css'
+            'css/style.css',
         ),
         'output_filename': 'css/groupie.css',
         'extra_context': {

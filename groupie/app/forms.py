@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
+import pytz
+
 from django import forms
+from django.conf import settings
 from django.core.validators import validate_email
 
 from groupie.app.models import Voting, Voter, VotingOption
@@ -39,6 +42,10 @@ class VotingAddForm(forms.ModelForm):
         model = Voting
         exclude = ('deadline', 'voting_options')
 
+    def _parse_datetime(self, dt):
+        naive = datetime.strptime(dt, '%d/%m/%Y %H:%M')
+        return pytz.timezone(settings.TIME_ZONE).localize(naive)
+
     def clean(self, *args, **kwargs):
         # TODO: rebuild the whole form either to have it build fully from backend or frontend
         cleaned_data = super(VotingAddForm, self).clean(*args, **kwargs)
@@ -46,11 +53,11 @@ class VotingAddForm(forms.ModelForm):
         # manually cleaning deadline
         d = self.data.get('deadline')
         if d:
-            d = datetime.strptime(d, '%d/%m/%Y %H:%M').strftime('%Y-%m-%d %H:%M')
+            d = self._parse_datetime(d).strftime('%Y-%m-%d %H:%M')
             cleaned_data.update({'deadline': d})
 
         # manually cleaning voting options
-        vos = self.data.getlist('voting_options')
+        vos = [x for x in self.data.getlist('voting_options') if x]
         if not vos:
             self._errors["voting_options"] = ["Voting options missing"]
         cleaned_data.update({'voting_options': vos})
@@ -72,10 +79,12 @@ class VotingAddForm(forms.ModelForm):
 
         for e in emails:
             Voter.objects.create(voting=v, email=e)
+
         # voting creator is also added as a voter
         Voter.objects.create(voting=v, email=v.from_email)
 
         for vo in voting_options:
-            VotingOption.objects.create(voting=v, text=vo)
+            dt = self._parse_datetime(vo)
+            VotingOption.objects.create(voting=v, option=dt)
 
         return v
