@@ -19,9 +19,12 @@ def home(request):
             redirect_url = utils.get_abs_url(voting, voting.creator.ref_hash)
             return HttpResponseRedirect(redirect_url)
 
-        context = {'form': form}
+        emails = ','.join(form.cleaned_data['emails'])
+        voting_options = form.cleaned_data['voting_options']
+        context = {'form': form, 'emails': emails,
+                   'voting_options': voting_options}
     else:
-        context = {}
+        context = {'emails': ''}
 
     return render(request, 'home.html', context)
 
