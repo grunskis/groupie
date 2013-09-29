@@ -10,8 +10,16 @@
     
     <div class="row">
       <div class="col-lg-12">
+        {% if is_creator %}
+        <h2>Some header</h2>
+        <h4>You asked your friends what's their preference when to do <em>{{ voting.description }}</em></h4>
+        {% else %}
       	<h2>{{ voting.creator.email }}</h2>
-      	<h4>Invited wants to know what do you think about <em> {{ voting.description }} </em> </h4> 
+      	<h4>Invited wants to know what do you think about <em>{{ voting.description }}</em></h4>
+        {% endif %}
+        {% if voting.deadline %}
+        <p>Please fill out this form until {{ voting.deadline }}, after that voting will be closed...</p>
+        {% endif %}
       </div>
     </div>
 
