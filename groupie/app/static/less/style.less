@@ -20,6 +20,11 @@ body {
 p, ul li, span {
 	color: @TextColor;
 }
+span [data-role="remove"],
+	span .glyphicon {
+		color: @Black;
+	}
+
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Oxygen', sans-serif;
 	color: @TitlesColor;
@@ -63,6 +68,10 @@ hr.divisor {
 	background:url(../img/group-travel02.jpg) left bottom;
 	width: 100%;
 
+	.help-block {
+		font-size: 14px;
+	}
+
 	&.jumbotron {
 		padding-top: 28px;
 		
@@ -98,6 +107,10 @@ hr.divisor {
 
 	form {
 
+		textarea {
+			resize: none;
+		}
+
 		label {
 			font-size: 18px;
 			margin: 0;
@@ -120,6 +133,7 @@ hr.divisor {
 		.bootstrap-tagsinput {
 	    	width: 100%;
 	    	font-size: 14px;
+	    	margin-bottom: 0px;
 	  	}
 
 	  	.icon-th { 
@@ -130,32 +144,40 @@ hr.divisor {
 }	
 
 /* Voting design */
-.panel-body {
-	cursor: pointer;
-	transition: all 0.2s ease-in-out 0.1s;
+.voting {
+	.italy {
+		padding-top: 10px;
+		background-position: right bottom;
+		height: 240px;
+	}
+	.panel-body {
+		cursor: pointer;
+		transition: all 0.2s ease-in-out 0.1s;
 
 
-	&:hover {
-		background: lighten(@Green, 53%);
+		&:hover {
+			background: lighten(@Green, 53%);
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			color: @Black;
+		}
+	}
+	.nr_of_votes {
+		cursor: pointer;
+		transition: all 0.2s ease-in-out 0.1s;
+
+		&:hover {
+			color: darken(@TextColor, 10%);
+		}
+	}
+	.vote-yes {
+		border: 1px solid @Green;
+		background: lighten(@Green, 50%);
 	}
 
-	h1, h2, h3, h4, h5, h6 {
-		color: @Black;
+	.btn-send-vote {
+		margin-top: 20px;
 	}
-}
-.nr_of_votes {
-	cursor: pointer;
-	transition: all 0.2s ease-in-out 0.1s;
 
-	&:hover {
-		color: darken(@TextColor, 10%);
-	}
-}
-.vote-yes {
-	border: 1px solid @Green;
-	background: lighten(@Green, 50%);
-}
-
-.btn-send-vote {
-	margin-top: 20px;
 }

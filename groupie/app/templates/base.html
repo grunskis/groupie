@@ -20,7 +20,7 @@
 
     {% compressed_js 'libs' %}
   </head>
-  <body>
+  <body class="{% block body_classes %}{% endblock %}">
   
   <div class="jumbotron italy">
     <div class="container">

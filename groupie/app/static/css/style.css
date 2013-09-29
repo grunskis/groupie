@@ -51,6 +51,10 @@ ul li,
 span {
   color: #7f8c8d;
 }
+span [data-role="remove"],
+span .glyphicon {
+  color: #333333;
+}
 h1,
 h2,
 h3,
@@ -94,6 +98,9 @@ hr.divisor {
   background: url(../img/group-travel02.jpg) left bottom;
   width: 100%;
 }
+.italy .help-block {
+  font-size: 14px;
+}
 .italy.jumbotron {
   padding-top: 28px;
 }
@@ -122,6 +129,9 @@ hr.divisor {
   text-decoration: none;
   cursor: pointer;
 }
+.italy form textarea {
+  resize: none;
+}
 .italy form label {
   font-size: 18px;
   margin: 0;
@@ -142,37 +152,43 @@ hr.divisor {
 .italy form .bootstrap-tagsinput {
   width: 100%;
   font-size: 14px;
+  margin-bottom: 0px;
 }
 .italy form .icon-th {
   display: none;
 }
 /* Voting design */
-.panel-body {
+.voting .italy {
+  padding-top: 10px;
+  background-position: right bottom;
+  height: 240px;
+}
+.voting .panel-body {
   cursor: pointer;
   transition: all 0.2s ease-in-out 0.1s;
 }
-.panel-body:hover {
+.voting .panel-body:hover {
   background: #e9faf0;
 }
-.panel-body h1,
-.panel-body h2,
-.panel-body h3,
-.panel-body h4,
-.panel-body h5,
-.panel-body h6 {
+.voting .panel-body h1,
+.voting .panel-body h2,
+.voting .panel-body h3,
+.voting .panel-body h4,
+.voting .panel-body h5,
+.voting .panel-body h6 {
   color: #333333;
 }
-.nr_of_votes {
+.voting .nr_of_votes {
   cursor: pointer;
   transition: all 0.2s ease-in-out 0.1s;
 }
-.nr_of_votes:hover {
+.voting .nr_of_votes:hover {
   color: #667273;
 }
-.vote-yes {
+.voting .vote-yes {
   border: 1px solid #27ae60;
   background: #ddf7e8;
 }
-.btn-send-vote {
+.voting .btn-send-vote {
   margin-top: 20px;
 }
