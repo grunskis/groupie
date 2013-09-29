@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
-
 import pytz
+from datetime import datetime
 
 from django import forms
 from django.conf import settings
