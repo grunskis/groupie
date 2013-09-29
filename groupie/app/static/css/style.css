@@ -146,16 +146,19 @@ hr.divisor {
   display: none;
 }
 /* Voting design */
-.voting-cell {
+.panel-body {
   cursor: pointer;
 }
-.voting-cell h1,
-.voting-cell h2,
-.voting-cell h3,
-.voting-cell h4,
-.voting-cell h5,
-.voting-cell h6 {
+.panel-body h1,
+.panel-body h2,
+.panel-body h3,
+.panel-body h4,
+.panel-body h5,
+.panel-body h6 {
   color: #333333;
+}
+.panel-body:hover {
+  background: #e9faf0;
 }
 .nr_of_votes {
   cursor: pointer;
