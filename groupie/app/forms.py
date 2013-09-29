@@ -39,7 +39,6 @@ class VotingAddForm(forms.ModelForm):
 
     class Meta:
         model = Voting
-        exclude = ('deadline', 'voting_options')
 
     def _parse_datetime(self, dt):
         naive = datetime.strptime(dt, '%d/%m/%Y %H:%M')

@@ -12,7 +12,7 @@
       <label class="control-label" for="id_from_email">Your email</label>
       <div>
         <input class="form-control input-sm" id="id_from_email" maxlength="255"
-               name="from_email" type="email" placeholder="you@yourserver.com" />
+               name="from_email" type="email" placeholder="you@yourserver.com" value="{{ form.from_email.value }}" />
         {% if form.from_email.errors %}
         <span class="alert alert-danger">{{ form.from_email.errors.0 }}</span>
         {% endif %}
@@ -21,42 +21,63 @@
     <div class="form-group col-md-12 {% if form.description.errors %}has-error{% endif %}">
       <label class="control-label" for="id_description">What is your proposal?</label>
       <div class="">
-        <textarea class="form-control input-sm" cols="40" id="id_description" name="description" rows="4" placeholder="Describe your planned activity here..."></textarea>
+        <textarea class="form-control input-sm" cols="40" id="id_description" name="description" rows="4"
+                  placeholder="Describe your planned activity here...">{{ form.description.value }}</textarea>
         {% if form.description.errors %}
         <span class="alert alert-danger">{{ form.description.errors.0 }}</span>
         {% endif %}
       </div>
     </div>
 
-    <div class="form-group col-md-12 {% if form.voting_options.errors %}has-error{% endif %}">
-      <label class="control-label" for="voting_option_0">When do you want to do it?</label>
-        <div id="initial_option" class="row">
-          <div class="voting-option input-append date col-sm-8" id="voting_option_0" data-date-format="dd/mm/yyyy hh:ii">
-            <input class="form-control input-xs" name="voting_options" size="16" type="text" placeholder="30/09/2013 18:00" />
-            <span class="add-on"><i class="icon-th"></i></span>
-          </div>
-          {% if form.voting_options.errors %}
-          <span class="alert alert-danger">{{ form.voting_options.errors.0 }}</span>
+    <div class="form-group col-md-12 {% if form.errors.voting_options %}has-error{% endif %}">
+      <label class="control-label" for="voting_option_{{ forloop.counter0 }}">When do you want to do it?</label>
+      {% for value in voting_options %}
+      <div id="initial_option" class="row">
+        <div class="voting-option input-append date col-xs-8 input" id="voting_option_{{ forloop.counter0 }}" data-date-format="dd/mm/yyyy hh:ii">
+          <input class="form-control input-sm" name="voting_options" size="16" type="text" value="{{ value }}" placeholder="30/09/2013 18:00" />
+          {% if not forloop.first %}
+          <span class="input-group-btn">
+            <button class="btn btn-danger remove" type="button">
+              <span class="glyphicon glyphicon-remove-circle"></span>
+            </button>
+          </span>
           {% endif %}
-          <a class="btn btn-default btn-sm col-xs-3" disabled="disabled" id="add-datepair">Add another</a>
+          <span class="add-on"><i class="icon-th"></i></span>
         </div>
+        {% if forloop.first %}
+        <a class="btn btn-default btn-sm col-xs-3" id="add-datepair">Add another</a>
+        {% endif %}
+      </div>
+      {% empty %}
+      <div id="initial_option" class="row">
+        <div class="voting-option input-append date col-sm-8" id="voting_option_0" data-date-format="dd/mm/yyyy hh:ii">
+          <input class="form-control input-xs" name="voting_options" size="16" type="text" placeholder="30/09/2013 18:00" />
+          <span class="add-on"><i class="icon-th"></i></span>
+        </div>
+        <a class="btn btn-default btn-sm col-xs-3" disabled="disabled" id="add-datepair">Add another</a>
+        {% if form.errors.voting_options %}
+        <span class="alert alert-danger">{{ form.errors.voting_options.0 }}</span>
+        {% endif %}
+      </div>
+      {% endfor %}
     </div>
 
     <div class="form-group col-md-12 {% if form.emails.errors %}has-error{% endif %}">
       <label class="control-label" for="id_emails">Who do you want to invite?</label>
       <div>
-        <input class="form-control input-sm" id="id_emails" name="emails" type="text" placeholder="List here emails of your buddies" />
-        <p class="help-block">Enter email addresses, press enter after each of them</p>
+        <input class="form-control input-sm" id="id_emails" name="emails" type="text" value="{{ emails }}" placeholder="List here emails of your buddies" />
         {% if form.emails.errors %}
         <span class="alert alert-danger">{{ form.emails.errors.0 }}</span>
         {% endif %}
+        <p class="help-block">Enter email addresses, press enter after each of them</p>
       </div>
     </div>
 
     <div class="form-group col-md-12">
       <label class="control-label" for="voting_deadline">Voting deadline (optional)</label>
       <div class="input-append date" id="voting_deadline" data-date-format="dd/mm/yyyy hh:ii">
-        <input class="form-control input-sm" size="16" name="deadline" type="text" placeholder="29/09/2013 22:00" />
+        <input class="form-control input-sm" size="16" name="deadline" type="text"
+               value="{{ form.deadline.value }}" placeholder="29/09/2013 22:00" />
         <span class="add-on"><i class="icon-th"></i></span>
       </div>
     </div>
