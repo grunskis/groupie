@@ -79,6 +79,7 @@ hr.divisor {
 			a  {
 				h1 {
 					color: @SecondTitlesColor;
+					transition: all 0.2s ease-in-out 0.1s;
 
 					&:hover {
 		    			color: darken(@SecondTitlesColor, 10%);
@@ -129,28 +130,40 @@ hr.divisor {
 }	
 
 /* Voting design */
-.panel-body {
-	h1, h2, h3, h4, h5, h6 {
-		color: @Black;
+.voting {
+	.italy {
+		padding-top: 10px;
+		background-position: right bottom;
+		height: 240px;
 	}
-	&:hover {
-		background: lighten(@Green, 53%);
+	.panel-body {
+		cursor: pointer;
+		transition: all 0.2s ease-in-out 0.1s;
+
+
+		&:hover {
+			background: lighten(@Green, 53%);
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			color: @Black;
+		}
+	}
+	.nr_of_votes {
+		cursor: pointer;
+		transition: all 0.2s ease-in-out 0.1s;
+
+		&:hover {
+			color: darken(@TextColor, 10%);
+		}
+	}
+	.vote-yes {
+		border: 1px solid @Green;
+		background: lighten(@Green, 50%);
 	}
 
-	cursor: pointer;
-}
-.nr_of_votes {
-	cursor: pointer;
-
-	&:hover {
-		color: darken(@TextColor, 10%);
+	.btn-send-vote {
+		margin-top: 20px;
 	}
-}
-.vote-yes {
-	border: 1px solid @Green;
-	background: lighten(@Green, 50%);
-}
 
-.btn-send-vote {
-	margin-top: 20px;
 }

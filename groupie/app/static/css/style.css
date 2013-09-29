@@ -113,6 +113,7 @@ hr.divisor {
 }
 .italy.jumbotron .title a h1 {
   color: #ecf0f1;
+  transition: all 0.2s ease-in-out 0.1s;
 }
 .italy.jumbotron .title a h1:hover {
   color: #cfd9db;
@@ -146,30 +147,37 @@ hr.divisor {
   display: none;
 }
 /* Voting design */
-.panel-body {
+.voting .italy {
+  padding-top: 10px;
+  background-position: right bottom;
+  height: 240px;
+}
+.voting .panel-body {
   cursor: pointer;
+  transition: all 0.2s ease-in-out 0.1s;
 }
-.panel-body h1,
-.panel-body h2,
-.panel-body h3,
-.panel-body h4,
-.panel-body h5,
-.panel-body h6 {
-  color: #333333;
-}
-.panel-body:hover {
+.voting .panel-body:hover {
   background: #e9faf0;
 }
-.nr_of_votes {
-  cursor: pointer;
+.voting .panel-body h1,
+.voting .panel-body h2,
+.voting .panel-body h3,
+.voting .panel-body h4,
+.voting .panel-body h5,
+.voting .panel-body h6 {
+  color: #333333;
 }
-.nr_of_votes:hover {
+.voting .nr_of_votes {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out 0.1s;
+}
+.voting .nr_of_votes:hover {
   color: #667273;
 }
-.vote-yes {
+.voting .vote-yes {
   border: 1px solid #27ae60;
   background: #ddf7e8;
 }
-.btn-send-vote {
+.voting .btn-send-vote {
   margin-top: 20px;
 }
