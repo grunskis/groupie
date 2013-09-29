@@ -34,7 +34,7 @@
       {% for value in voting_options %}
       <div id="initial_option" class="row">
         <div class="voting-option input-append date col-xs-8 input" id="voting_option_{{ forloop.counter0 }}" data-date-format="dd/mm/yyyy hh:ii">
-          <input class="form-control input-sm" name="voting_options" size="16" type="text" value="{{ value }}" placeholder="30/09/2013 18:00" />
+          <input class="form-control input-sm" name="voting_options" size="16" type="text" value="{{ value|date:'m/d/Y H:i' }}" placeholder="30/09/2013 18:00" />
           <span class="add-on"><i class="icon-th"></i></span>
         </div>
         {% if not forloop.first %}
@@ -75,11 +75,14 @@
       </div>
     </div>
 
-    <div class="form-group col-md-12">
+    <div class="form-group col-md-12 {% if form.deadline.errors %}has-error{% endif %}">
       <label class="control-label" for="voting_deadline">Voting deadline (optional)</label>
       <div class="input-append date" id="voting_deadline" data-date-format="dd/mm/yyyy hh:ii">
         <input class="form-control input-sm" size="16" name="deadline" type="text"
                value="{{ form.deadline.value }}" placeholder="29/09/2013 22:00" />
+        {% if form.deadline.errors %}
+        <span class="alert alert-danger">{{ form.deadline.errors.0 }}</span>
+        {% endif %}
         <span class="add-on"><i class="icon-th"></i></span>
       </div>
     </div>
