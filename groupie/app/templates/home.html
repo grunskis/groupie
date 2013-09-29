@@ -21,7 +21,7 @@
   <div class="form-group col-md-12 {% if form.description.errors %}has-error{% endif %}">
     <label class="control-label" for="id_description">What is your proposal?</label>
     <div class="">
-      <textarea class="form-control input-sm" cols="40" id="id_description" name="description" rows="5" placeholder="Describe your planned activity here..."></textarea>
+      <textarea class="form-control input-sm" cols="40" id="id_description" name="description" rows="4" placeholder="Describe your planned activity here..."></textarea>
       {% if form.description.errors %}
       <span class="alert alert-danger">{{ form.description.errors.0 }}</span>
       {% endif %}
