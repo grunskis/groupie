@@ -21,7 +21,7 @@
         <h3>You asked your friends what's their preference when to do <em>{{ voting.description }}</em></h3>
         {% else %}
       	<h2>{{ voting.creator.email }}</h2>
-      	<h4>Invited wants to know what do you think about <em>{{ voting.description }}</em></h4>
+      	<h4>Wants to know what do you think about <em>{{ voting.description }}</em></h4>
         {% endif %}
         {% if voting.deadline %}
         <p>Please fill out this form until <strong>{{ voting.deadline }} </strong>, after that voting will be closed...</p>

@@ -33,7 +33,7 @@ $(function () {
         } else {
             nr_of_votes = nr_of_votes + 1;
             $this.removeClass('vote-no').addClass('vote-yes');
-            voters[0] = 'You';
+            voters.push('You');
         }
 
         $option.trigger('click');
