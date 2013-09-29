@@ -146,6 +146,9 @@ hr.divisor {
   display: none;
 }
 /* Voting design */
+.thumbnail {
+  cursor: pointer;
+}
 .thumbnail h1,
 .thumbnail h2,
 .thumbnail h3,
@@ -163,4 +166,7 @@ hr.divisor {
 .vote-yes {
   border: 1px solid #27ae60;
   background: #ddf7e8;
+}
+.btn-send-vote {
+  margin-top: 20px;
 }

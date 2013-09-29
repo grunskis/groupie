@@ -1,1 +1,9 @@
-<p>{{ voters }}</p>
+<h4>People who voted for this option</h4>
+<ul class="list-unstyled">
+  {{#voters}}
+  <li>{{ . }}</li>
+  {{/voters}}
+  {{^voters}}
+  <li>Nobody has voted for this option :(</li>
+  {{/voters}}
+</ul>
