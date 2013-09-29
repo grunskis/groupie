@@ -6,7 +6,7 @@ from django.views.decorators.http import require_http_methods
 from groupie.app import utils
 from groupie.app.forms import VotingAddForm, VotingForm
 from groupie.app.models import Voting, Voter, VotingOption
-from groupie.app.voting import setup_voting
+from groupie.app.voting import setup_voting, vote
 
 
 @require_http_methods(["GET", "POST"])

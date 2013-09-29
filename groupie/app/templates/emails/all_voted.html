@@ -1,13 +1,18 @@
-[?] {{ voting.description }}
+The tribe has spoken.
+
+The question...
+
+{{ voting.description }}
+
+
+Has an answer...
 
 {% for vo in voting.voting_options.all %}
-	{{ forloop.counter }}. {{ vo.option }}
+	{{ forloop.counter }}. [{{ vo.voters.count }}] {{ vo.option }}
 {% endfor %}
 
 
-Follow {{ voting_url }} to let me know what you choose. 
-
-Thank you :)
+Deal with it.
 
 
 ┏(-_-)┛┗(-_-﻿ )┓┗(-_-)┛┏(-_-)┓ 
