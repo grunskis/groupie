@@ -2,8 +2,11 @@
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils import timezone
+from iron_worker import IronWorker
 
 from groupie.app import utils
+
+worker = IronWorker()
 
 
 def setup_voting(voting):
@@ -13,7 +16,8 @@ def setup_voting(voting):
     notify_create(voting)
 
     if voting.deadline:
-        notify_deadline(voting)
+        worker.queue(start_at=voting.deadline, code_name="notify_deadline",
+                     payload={'url': utils.get_abs_deadline_hack_url(voting)})
 
 
 def vote(voter, voting_options):
@@ -28,6 +32,7 @@ def vote(voter, voting_options):
     # send notifications if progress thresholds reached for the first time
     if not voter.voting.notify_all_voted_at and voters_not_voted == 0:
         notify_all_voted(voter.voting)
+        # TODO cancel deadline notification
     elif voters_all.count() > 3 and not voter.voting.notify_half_voted_at and (voters_all.count() / 2.0) >= voters_not_voted:
         notify_half_voted(voter.voting)
 
@@ -41,7 +46,9 @@ def notify_create(voting):
 
 
 def notify_deadline(voting):
-    pass
+    notify(voting, voting.voters.all(), "[groupie-no-jokes]", "emails/deadline.html")
+    voting.notify_created_at = timezone.now()
+    voting.save()
 
 
 def notify_half_voted(voting):
