@@ -16,7 +16,8 @@ def setup_voting(voting):
     notify_create(voting)
 
     if voting.deadline:
-        worker.queue(code_name="notify_deadline", payload={'url': utils.get_abs_deadline_hack_url(voting)})
+        worker.queue(start_at=voting.deadline, code_name="notify_deadline",
+                     payload={'url': utils.get_abs_deadline_hack_url(voting)})
 
 
 def vote(voter, voting_options):
@@ -31,6 +32,7 @@ def vote(voter, voting_options):
     # send notifications if progress thresholds reached for the first time
     if not voter.voting.notify_all_voted_at and voters_not_voted == 0:
         notify_all_voted(voter.voting)
+        # TODO cancel deadline notification
     elif voters_all.count() > 3 and not voter.voting.notify_half_voted_at and (voters_all.count() / 2.0) >= voters_not_voted:
         notify_half_voted(voter.voting)
 
