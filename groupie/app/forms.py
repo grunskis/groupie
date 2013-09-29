@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
+import pytz
+
 from django import forms
+from django.conf import settings
 from django.core.validators import validate_email
 
 from groupie.app.models import Voting, Voter, VotingOption
@@ -50,7 +53,7 @@ class VotingAddForm(forms.ModelForm):
             cleaned_data.update({'deadline': d})
 
         # manually cleaning voting options
-        vos = self.data.getlist('voting_options')
+        vos = [x for x in self.data.getlist('voting_options') if x]
         if not vos:
             self._errors["voting_options"] = ["Voting options missing"]
         cleaned_data.update({'voting_options': vos})
@@ -71,7 +74,13 @@ class VotingAddForm(forms.ModelForm):
         v = Voting.objects.create(**self.cleaned_data)
         for e in emails:
             Voter.objects.create(voting=v, email=e)
-        for vo in voting_options:
-            VotingOption.objects.create(voting=v, text=vo)
+
+        for option in voting_options:
+            dt = self._parse_datetime(option)
+            VotingOption.objects.create(voting=v, option=dt)
 
         return v
+
+    def _parse_datetime(self, dt):
+        naive = datetime.strptime(dt, '%d/%m/%Y %H:%M')
+        return pytz.timezone(settings.TIME_ZONE).localize(naive)
