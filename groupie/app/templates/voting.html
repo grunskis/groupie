@@ -30,8 +30,8 @@
       {% for option in voting_options %}
       <div class="col-sm-6 col-md-3">
     	<div class="thumbnail vote-{{ option.vote }}" data-option="{{ option.id }}">
-          <h4 class="text-center">{{ option.date }}</h4>
-          <h2 class="text-center">{{ option.time }}</h2>
+          <h4 class="text-center">{{ option.date|date:'d/m/Y' }}</h4>
+          <h2 class="text-center">{{ option.time|date:'H:i' }}</h2>
   	</div>
         <span class="nr_of_votes" data-voters="{{ option.voters }}" data-nr-of-votes="{{ option.nr_of_votes }}">
           {{ option.nr_of_votes }} vote{{ option.nr_of_votes|pluralize }}
