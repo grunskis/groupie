@@ -46,11 +46,11 @@
       <label class="control-label" for="id_emails">Who do you want to invite?</label>
       <div>
         <input class="form-control input-sm" id="id_emails" name="emails" type="text" placeholder="List here emails of your buddies" />
+        <p class="help-block">Enter email addresses, press enter after each of them</p>
         {% if form.emails.errors %}
         <span class="alert alert-danger">{{ form.emails.errors.0 }}</span>
         {% endif %}
       </div>
-      <p class="help-block">Enter email addresses, press enter after each of them</p>
     </div>
 
     <div class="form-group col-md-12">
